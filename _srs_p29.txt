@@ -1,0 +1,36 @@
+9. Customization Framework
+The same product will be sold to eleven kinds of factory. Every one of them will ask for something slightly
+different. If each request becomes a code change, the product becomes unmaintainable. So the following
+seven things are customisable as data, by the customer or the implementer, with no deployment:
+# What is customisableHow it works
+C1 Custom fields Any master or transaction screen can receive extra fields defined in Settings: field
+label, key, data type (text, number, decimal, date, dropdown, multi-select, checkbox,
+file), required or optional, default value, validation (min, max, regex, options list),
+display section, sort order, and whether it appears on the printed document, in list
+columns and in exports. Values are stored in a JSON column on the parent table plus a
+normalised custom_field_values table for filterable fields.
+C2 Document numberingPer document type and per financial year: prefix, suffix, padding width, starting
+number, separator, and whether the number resets each year. Example pattern 
+{PREFIX}/{FY}/{SEQ:5} produces SO/26-27/00042. Numbers are allocated with a
+row lock so two simultaneous saves cannot collide. Optional per-branch series.
+C3 Approval workflowsRules per document type with conditions on any header field (amount, discount %,
+customer group, item category), a sequence of approver roles, an optional parallel or
+sequential mode, escalation after N hours, and auto-approval below a threshold.
+C4 Print templates As described in Section 8. Multiple templates per document type, one marked default,
+selectable at print time.
+C5 Terms and conditions
+library
+Named blocks of text with rich formatting, attachable per document type and per
+customer, so export customers get different terms from domestic ones.
+C6 Dashboards Each role gets a dashboard assembled from a widget library (KPI tile, line chart, bar
+chart, pie, table, pending-approvals list). Widgets are chosen, ordered and resized per
+role; users may then rearrange their own copy.
+C7 Labels and languageEvery visible label can be overridden — a furniture maker may call a Work Order a
+"Job Card". Language files support English, Hindi and Gujarati, with the option to add
+more by uploading a translation file.
+Guard rail. Custom fields must never be allowed on columns that drive calculations (quantity, rate, tax, stock).
+Those belong to the core model. Custom fields are for information the business wants to record and print, not
+for changing arithmetic. Any request to change a calculation is a code change and goes through the release
+process.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 29

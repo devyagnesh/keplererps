@@ -1,0 +1,46 @@
+Field Type Req. Validation rule
+Contact Persons Repeatable Yes
+(≥1)
+Name required; mobile required and 10 digits for India; email optional
+but valid if entered; designation optional; WhatsApp opt-in checkbox
+with the consent date recorded automatically.
+Credit Limit Decimal No ≥ 0, max 12 digits. Zero means unlimited only if "Unlimited credit" is
+ticked; otherwise zero blocks all credit sales.
+Credit Days Integer No 0–365. Drives the invoice due date and the overdue reminder.
+Payment T erms Select No From the terms master. Prints on the invoice.
+Price List Select No From the price list master. Determines the default rate on sales
+documents.
+TDS / TCS ApplicableCheckbox
++ Select
+No When ticked, a section and rate must be selected.
+Assigned Sales
+Executive
+Select Cond. Required when the record scope model is in use, because it drives who
+can see the party.
+Bank Details Composite No IFSC must match ^[A-Z]{4}0[A-Z0-9]{6}$; account number 9–18
+digits; the two account-number entries must match.
+Status Select Yes Active / Inactive / Blocked. Blocked parties cannot be used on new
+documents; existing documents are untouched.
+Business rules
+# Rule
+BR-01 A master record that is referenced by any transaction can never be deleted — only made inactive. The delete
+button shows the count of blocking references.
+BR-02 GSTIN uniqueness is checked across the whole party table, ignoring soft-deleted rows, and the error message
+names the conflicting party.
+BR-03 Changing a party's state after transactions exist raises a warning, because it changes IGST versus CGST/SGST
+behaviour on future documents. Past documents keep their original tax treatment.
+BR-04 Warehouses form a tree; a parent cannot be deleted while children exist, and stock is only ever held at leaf
+level.
+BR-05 The company record is a singleton — exactly one row, created by the installer, never deletable.
+MODULE M02
+User, Role and Permission Management
+Purpose
+Creates the people who use the system and controls exactly what each of them may do and see. The
+detailed model is described in Section 5; this module is the screens that operate it.
+How it works
+An admin creates a user, links them optionally to an employee record, assigns one or more roles, and sets
+a data scope. The permission matrix screen shows a grid of modules down the side and actions across the
+top, with a tick box in every cell and "select all" controls for a row or a column. Changes take effect on the
+user's next request — the permission cache is cleared immediately for that user.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 33

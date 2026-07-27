@@ -1,0 +1,46 @@
+Optional customer-facing scan. When the feature flag is on, a person with no login who scans the QR
+reaches a public page showing item, batch, manufacturing date, expiry, applicable standard and a
+downloadable certificate of analysis — nothing more. No quantity in stock, no price, no other customer, no
+order. This is the single most appreciated feature for anyone supplying an OEM or a pharma-adjacent buyer,
+because their incoming-inspection team can verify a drum in seconds. The page must be rate-limited per IP
+address and must never accept a query that is not an exact code match.
+10.17.6 Working without a network
+Godowns and loading bays are where the signal is worst, and that is exactly where scanning happens. The
+scanning  screens  therefore  operate  offline:  scans  are  held  in  local  storage  on  the  device  with  their
+timestamp and queued for upload, and the operator continues working with a visible unsent counter. When
+the connection returns, the queue is submitted in order.
+Scans that fail on upload — the package was dispatched by someone else in the meantime, or the challan
+was cancelled — are never discarded. They land in an exception list that the supervisor must clear, with
+the original scan time preserved so it is clear what happened in what order. A scan queue that silently
+drops entries is worse than no offline mode at all, because the operator believes the work was recorded.
+User stories
+US-M17-01 — As a Packing Operator, I want to pack a finished batch into boxes and print all the labels in
+one action, so that forty boxes do not need forty screens.
+Acceptance: entering the batch, the quantity per box and the number of boxes creates that many packing
+units, numbers them "n of N", and produces a single print-ready PDF; the last box automatically carries the
+remainder when the batch does not divide evenly.
+US-M17-02 — As a Store Keeper, I want to scan a box to take it into stock, so that I do not type item codes
+and quantities.
+Acceptance: a successful scan posts a stock ledger entry for the exact item, batch and quantity held in the
+unit, sets the unit's location and status to In Stock, and shows a confirmation with a running count for the
+session.
+US-M17-03 — As a Dispatch Officer, I want to load a vehicle by scanning boxes against a challan, so that the
+wrong material never leaves the gate.
+Acceptance: every check in the loading validation table is applied on each scan; the screen shows loaded
+against required per item; the challan cannot be confirmed while the counts differ.
+US-M17-04 — As a Store Keeper, I want one scan of a pallet to move all twenty cartons on it, so that a stock
+transfer takes one action.
+Acceptance: scanning a parent unit applies the chosen action to it and every descendant; a preview lists
+exactly what will be affected before it is committed; any child that fails its own validation blocks the whole
+action and is named.
+US-M17-05 — As a Quality Inspector, I want a scanned box to show me who made it, on which machine and
+mould, and what the test readings were, so that I can investigate a complaint from the box the customer sent
+back.
+Acceptance: the scan screen shows work order, machine, mould, operator, shift, date, time and the full
+inspection record with readings against specification, in one view without further navigation.
+US-M17-06 — As a Store Keeper, I want to keep scanning when the warehouse WiFi drops, so that stock
+taking is not abandoned halfway.
+Acceptance: scans queue on the device with a visible unsent count, upload automatically on reconnection,
+and any that fail appear in a supervisor exception list with their original timestamp — never discarded.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 66

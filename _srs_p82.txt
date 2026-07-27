@@ -1,0 +1,58 @@
+16. Implementation Roadmap
+Phase Duration Delivers Milestone / exit criteria
+0 2 weeks Project setup: repository, coding
+standards, continuous integration,
+base Laravel skeleton, layered
+structure, base model with logging,
+numbering engine, permission
+scaffolding
+A "hello module" can be created end to end with
+logging, permissions and PDF working
+1 6 weeks M01 Company and masters · M02
+Users and RBAC · M03 Item master ·
+M08 Inventory core with stock ledger ·
+M16 Settings foundation · installer
+Opening stock can be loaded and a stock report
+tallies. This is the foundation everything else
+stands on.
+2 8 weeks M06 Sales · M07 Purchase · M12
+Dispatch · M04 BOM · M09 Production ·
+PDF engine · core reports
+A full order-to-cash and procure-to-pay cycle
+runs, with stock moving correctly at every step
+3 6 weeks M13 Accounts and GST · M10 Quality ·
+M11 Maintenance · M05 CRM ·
+notification engine with WhatsApp and
+Firebase
+Books tally with stock; GSTR-1 working sheet
+matches the sales register; alerts are delivered
+reliably
+4 5 weeks M14 HR and payroll · M15 full report
+and dashboard set · customization
+framework completed · customer
+portal
+All 16 modules feature-complete against this
+document
+5 4 weeks Industry profile packs for all eleven
+industries · performance tuning ·
+security review · documentation and
+training videos · pilot installation
+A pilot customer runs a full month on the system
+with no parallel manual records
+Durations assume a team of three developers, one QA engineer and one implementation consultant. Phases 2 and 3 overlap
+partially: accounts posting rules are written alongside the sales and purchase modules rather than after them, because
+retrofitting accounting into finished documents is far more expensive than building it in.
+16.1 Acceptance approach
+Stage What happens
+Story acceptance Each user story in this document is a test case. QA verifies the acceptance criteria exactly
+as written.
+Module acceptance The business owner runs their own real transactions through the module and signs off
+against the field and validation tables.
+Integration acceptanceEnd-to-end scenarios from Section 12 are run with real data, checking that stock,
+accounting and alerts all agree.
+Parallel run One month of running the ERP alongside the existing method, reconciling stock and sales
+figures at the end of the month.
+Go-live Opening balances locked, manual records stopped, support arrangement in place for the
+first quarter.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 82

@@ -1,0 +1,61 @@
+Package type Label stock Why
+Rubber, hot-packed
+goods
+Synthetic with high-
+temperature adhesive
+Applied while the product is still warm; normal adhesive
+releases.
+Steel and aluminium
+sections
+T ag-and-wire, or a large label
+on the bundle strap
+Cannot be stuck to an oiled or scaled surface reliably.
+T extile rolls, cable coilsPaper label plus a duplicate
+inside the wrapper
+The outer label is often torn during handling; the inner copy
+saves the batch identity.
+Pallet A4 sheet in a plastic pouchReusable pouch, larger QR, replaced when the pallet is
+rebuilt.
+Printing runs through the existing PDF engine (§8). Labels are generated as a PDF at the exact physical
+dimensions of the label roll, sent to a thermal label printer. T wo practical constraints on shared hosting: the
+QR image must be produced by a pure-PHP library that does not depend on Imagick, and any print run of
+more than fifty labels must go through the queue rather than the web request, because the PHP execution
+time limit on cPanel will otherwise cut the job off halfway.
+10.17.4 Scanning — one code, several actions
+Figure 10.6 — From scan to action. The same code drives receiving, moving, picking, dispatching and enquiry.
+Stock in
+Three situations produce a stock-in scan. From production: after the batch passes QC (M10), the operator
+packs it, the system creates the packing units, the labels print, and scanning them at the finished-goods
+store posts the receipt into stock. From purchase: incoming material is labelled at the goods-in point after
+GRN, so raw material drums are traceable through production the same way. From a customer return:
+scanning a returned box brings it back into a quarantine location pending re-inspection, never straight into
+saleable stock.
+Stock out and dispatch
+The dispatch officer opens the delivery challan on a phone or tablet and scans each package as it goes
+onto the vehicle. The screen shows a live count of loaded against required, per item. The value of this is not
+the speed — it is that the wrong box gets caught at the tailgate instead of at the customer's gate. These
+are the checks the system runs on every loading scan:
+Condition found Result What the operator sees
+Code not recognised Block "This label is not in the system. Do not load this package."
+Batch is on QC hold or rejected Hard block Names the inspection and its status. No override exists for
+this, at any permission level.
+Batch expired, or remaining shelf life
+below the customer's agreed minimum
+Hard block Shows expiry date and the customer's shelf-life
+requirement from the sales order.
+1. SCAN
+Phone camera in the browser · USB or Bluetooth 2D scanner · typed fallback code
+2. RESOLVE — one indexed lookup on the code
+Unknown code, voided code or wrong check digit stops here with a message in plain language, not an error trace
+3. CONTEXT SCREEN — item, batch, quantity, status, location, linked order
+Every field passes through the same permission and record-scope gates as any other screen (§5)
+STOCK IN
+TRANSFER
+PICK / ALLOCATE
+LOAD + DISPATCH
+OPEN / SPLIT
+VIEW ONLY
+Which buttons appear is decided by the unit's current status and the scanning user's permissions — the operator is never shown an action that will be rejected.
+Every scan writes a row to the scan log whether it succeeded or failed. A refused scan is evidence, and refusals are where process problems become visible.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 64

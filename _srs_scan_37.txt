@@ -1,0 +1,44 @@
+Field Type Req. Validation rule
+Is Purchasable /
+Sellable /
+Manufacturable
+Checkbox Yes At least one must be ticked. Controls where the item appears in
+dropdowns.
+Industry attributesDynamic Varies Rendered from the industry profile with its own type, required flag and
+range validation, exactly as defined in Section 4.3.
+Batch and serial rules
+# Rule
+BR-11 A batch number is unique per item, not globally. The same batch string may exist for two different items.
+BR-12 Batch numbers are generated automatically from a configurable pattern (for example 
+{ITEM}/{YY}{MM}/{SEQ:3}) or entered manually, chosen per item.
+BR-13 A serial number is unique across the entire system and can exist in only one warehouse, in one state, at any
+moment.
+BR-14 Issuing a batch-tracked item without selecting a batch is blocked at the server. The batch dropdown shows
+only batches with a positive balance in the selected warehouse.
+BR-15 When expiry tracking is on, the default issue order is FEFO (first expiry, first out). The user may override it only
+with the inventory.override_fefo permission, and the override is logged with a reason.
+BR-16 Batch genealogy is maintained: each produced batch records the input batches consumed, so a finished lot
+can be traced back to raw material lots and forward to the customers it was sold to.
+MODULE M04
+Bill of Materials and Routing
+Purpose
+Records the recipe for making an item — which materials, how much of each, plus the sequence of
+operations, the machines used and the time taken. The BOM drives material planning, material issue,
+production costing and scrap accounting.
+How it works
+A BOM has a header (the item being produced, the output quantity the recipe is written for, a version, and
+a validity period) and two sets of lines:  components and  operations. Components list the input items
+with quantity per output unit and an expected wastage percentage. Operations list the manufacturing
+steps in sequence, each with a machine or work centre, setup time, run time per unit and an optional
+outsourced-vendor flag for job work.
+BOMs are versioned. When a recipe changes, a new version is created rather than editing the old one,
+because past production must remain explainable. Only one version can be "active" for a given item at a
+given date. Multi-level BOMs are supported: a furniture BOM may include a sub-assembly which itself has a
+BOM, and the system explodes the tree to any depth, detecting circular references.
+User stories
+US-M04-01 — As a Production Planner, I want to define a BOM with materials and wastage, so that the
+correct quantity is issued and scrap is expected rather than a surprise.
+Acceptance: required quantity = (BOM quantity ÷ BOM output) × order quantity × (1 + wastage %); the
+calculation is shown on screen before the work order is released.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 37

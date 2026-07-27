@@ -1,0 +1,71 @@
+Condition found Result What the operator sees
+Unit already dispatched Block Names the challan, date and customer it went out on. This
+catches a duplicated label immediately.
+Unit reserved for a different sales orderBlock,
+overridable
+Names the other order and customer. Override needs the
+reallocation permission and a typed reason, and notifies
+the sales owner of that order.
+Item or batch not on this challan at allBlock,
+overridable
+Offers to add the line if the sales order has a pending
+quantity for that item; otherwise refuses.
+Unit is in a different warehouse than the
+challan's dispatch warehouse
+Warn Allows loading and posts the implied transfer, so the
+ledger stays honest instead of the box vanishing.
+Unit already scanned in this session Warn "Already loaded — package 12 of 40." No second entry is
+created.
+Unit's parent pallet is allocated elsewhereBlock Prompts the operator to de-nest the unit from the pallet
+first, so the pallet record does not silently become wrong.
+Loaded quantity does not match the
+challan at confirmation
+Block Lists the shortfall or excess by item and batch. The challan
+cannot be confirmed until it matches or is amended.
+Opening and splitting
+Real dispatches are not always whole boxes. T wo actions handle this, and both are deliberate rather than
+silent. Open breaks the seal: the unit's status becomes Opened, its contents return to loose stock in the
+same location, and the code is retired. Split takes part of the contents into a new unit with a new code,
+reducing the original — used when half a drum goes to one customer. Neither action changes total stock
+quantity. Both are logged with the user, the reason and the before-and-after contents, because a box that
+quietly loses ten kilograms is how inventory drifts.
+10.17.5 What a scan reveals — and to whom
+The information screen is a single scan away, which is exactly why it must be filtered. The label is on a box
+handled by a transporter and opened by a customer.
+Information group Visible to Notes
+Item, batch, quantity, pack date,
+expiry
+Any logged-in user with scan
+permission
+The basic identity of the package.
+Current status and storage
+location
+Store, production, dispatch and QC
+roles
+Restricted to the user's branch and
+warehouse scope.
+Source work order, machine,
+mould, operator, shift
+Production, QC, management The backward traceability chain from
+§12.3, now anchored at package level.
+Inspection results and certificate
+of analysis
+QC, management, and the customer
+view where enabled
+The COA PDF is generated on demand
+from stored inspection readings.
+Linked sales order, customer,
+challan, invoice
+Sales, dispatch, accounts,
+management
+Sales executives see only their own
+customers unless their data scope is
+wider.
+Cost, selling rate, margin Management and accounts onlyGoverned by the field-level rules in §5.
+Never printed on the label.
+Full movement history of this
+package
+Management, audit Every scan, transfer, allocation and
+status change with user and timestamp.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 65

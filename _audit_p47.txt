@@ -1,0 +1,43 @@
+Transaction Effect Notes
+Material Return from
+Production
+IN Unused material sent back to stores
+Delivery Challan / Invoice OUT At the valuation rate; the sale value is separate
+Sales Return IN At the original issue cost, not the selling price
+Stock Transfer OUT + INT wo ledger rows; in-transit stock is visible when transfer takes time
+Stock Adjustment IN or OUTAfter physical counting; needs a reason and approval
+Job Work Issue / Receipt OUT / IN Material at a vendor remains the company's stock, shown in a separate
+"with vendor" location
+Opening Stock IN One-time at go-live, locked after the opening date
+User stories
+US-M08-01 — As a Store Keeper, I want to issue material against a work order by scanning a barcode, so
+that issuing is fast and accurate.
+Acceptance: scanning an item barcode adds a line; scanning a batch barcode selects the batch; the BOM-
+suggested quantity is pre-filled and any difference from it must be explained.
+US-M08-02 — As an Owner, I want to know the value of stock lying in the factory today, so that I know how
+much money is tied up.
+Acceptance: a stock valuation report as at any past date, by warehouse, category and item, using the
+configured costing method, tallying with the inventory account in the general ledger.
+US-M08-03 — As a Store Keeper, I want to do a physical count and post the difference, so that the system
+matches reality.
+Acceptance: a count sheet is generated and optionally printed with a blank quantity column; counted
+quantities are entered or imported; the variance report shows quantity and value difference per item; posting
+requires approval above a configurable value and writes an adjustment entry with a reason.
+US-M08-04 — As a QC Inspector, I want received material to sit in quarantine until I clear it, so that
+unchecked material never reaches production.
+Acceptance: quarantine is a system warehouse; its stock is excluded from available quantity; only a QC
+acceptance can move it to the main store, and only a QC rejection can move it to the rejection area.
+US-M08-05 — As an Owner, I want to see slow-moving and dead stock, so that I can stop buying it and clear
+it out.
+Acceptance: a report showing items with no movement in a configurable number of days, with quantity, value
+and last movement date, exportable.
+Fields and validation — Stock Ledger entry (system generated)
+Field Type Req. Validation rule
+Item FK Yes Must exist and be a stock item.
+Warehouse FK Yes Must be a leaf warehouse.
+Batch / Serial FK Cond. Required per the item's tracking type.
+Posting Date & TimeDateTime Yes Cannot be in a closed period. Back-dated entries need the 
+inventory.backdate permission and trigger revaluation of all later
+entries for that item.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 47

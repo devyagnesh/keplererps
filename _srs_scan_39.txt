@@ -1,0 +1,45 @@
+Field Type Req. Validation rule
+Is Critical Checkbox No When ticked, a work order cannot be released if this component is short.
+Substitute Items Repeatable No Alternative item plus conversion ratio > 0.
+Operation SequenceSelect No Which operation consumes this component. Blank means issue at the
+start.
+Issue Method Select Yes Manual issue / Backflush. Backflush deducts stock automatically when
+production output is recorded.
+Fields and validation — BOM operation line
+Field Type Req. Validation rule
+Sequence Integer Yes > 0, unique within the BOM. Determines the order of operations.
+Operation Select Yes From the operation master (Mixing, Extrusion, Moulding, Cutting,
+Printing, Assembly, Anodising, Packing …).
+Work Centre /
+Machine
+Select Cond. Required when not outsourced. Must be an active machine.
+Setup Time (min) Decimal No ≥ 0. Counted once per work order, not per unit.
+Run Time per Unit
+(min)
+Decimal Yes > 0. For continuous processes such as extrusion, enter time per metre
+or per Kg to match the stock UOM.
+Machine Rate per
+Hour
+Decimal No ≥ 0. Defaults from the machine master.
+Labour Rate per HourDecimal No ≥ 0.
+Operators RequiredInteger No 0–20. Multiplies the labour cost.
+Is Outsourced Checkbox No When ticked, vendor and rate per unit become required and machine
+becomes optional.
+Quality Check
+Required
+Checkbox No When ticked, an in-process inspection is created automatically after this
+operation, and the next operation is blocked until it passes.
+MODULE M05
+CRM and Lead Management
+Purpose
+Captures every enquiry from the moment it arrives until it becomes a customer or is lost, so that no
+enquiry is forgotten and the owner can see where sales effort is going.
+How it works
+Leads enter the system from four sources: manual entry, a website enquiry form, a bulk CSV or Excel
+upload, or a marketplace API such as IndiaMART or TradeIndia. Each lead is assigned to a sales executive,
+either manually or by a round-robin rule. The lead moves through six stages. At every stage the executive
+records follow-ups with a next-action date; the system reminds them by push notification on the due date.
+A won lead converts into a Party (customer) and optionally straight into a quotation, carrying its details
+across without retyping.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 39

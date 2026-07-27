@@ -1,0 +1,89 @@
+11. Data Model
+11.1 Core entity relationships
+The diagram shows the central tables and how they connect. Header-and-line pairs (order and order items)
+are shown as a single box for readability; every transaction table follows this pattern.
+Figure 11.1 — Core data model. The stock ledger sits at the centre; every physical movement passes through it.
+11.2 Database conventions
+Convention Rule
+T able names Plural, lower snake case, prefixed by module where helpful: sales_orders, 
+sales_order_items, stock_ledger_entries.
+Primary key id, unsigned big integer, auto-increment.
+Foreign keys {singular_table}_id with a real foreign key constraint, ON DELETE RESTRICT for
+masters and ON DELETE CASCADE for lines belonging to a header.
+Timestamps created_at, updated_at, deleted_at on every table, plus created_by and 
+updated_by on transaction tables.
+Money and quantity DECIMAL(18,2) for money, DECIMAL(18,4) for quantity and rate, DECIMAL(9,4) for
+percentages. Never FLOAT or DOUBLE.
+Status columns Short string values backed by a PHP enum, not integers — a database dump should be
+readable without a lookup table.
+JSON columns Used only for custom field values, industry attributes and log properties. Anything that
+must be filtered or joined gets a real column.
+items
+id·item_code·name·type
+category_id·stock_uom_id·hsn_id
+tracking_type·gst_rate·attributes(JSON)
+reorder_level·std_cost·is_active
+parties (customers + suppliers)
+id·code·name·party_type
+gstin·gst_type·pan·state_id
+credit_limit·credit_days·price_list_id
+assigned_user_id·status
+warehouses
+id·code·name·parent_id
+branch_id·type(store/quarantine/
+wip/rejection/with_vendor)
+is_leaf·is_active
+sales_orders + _items
+order_no·date·party_id·status
+item_id·qty·base_qty·rate·disc
+tax·delivered_qty·invoiced_qty
+warehouse_id·expected_date
+purchase_orders + _items
+po_no·date·party_id·status
+item_id·qty·rate·tolerance_pct
+received_qty·billed_qty
+warehouse_id·expected_date
+boms + _components + _operations
+item_id·version·output_qty
+valid_from·is_active
+component_item_id·qty·wastage_pct
+operation_id·machine_id·run_time
+work_orders
+wo_no·item_id·bom_id·qty
+sales_order_item_id·machine_id
+planned_start/end·produced_qty
+rejected_qty·status
+delivery_challans / invoices
+doc_no·date·party_id·so_id
+vehicle_no·transporter_id·lr_no
+eway_bill_no·taxable·tax·total
+status·pdf_path
+grns + _items
+grn_no·date·party_id·po_id
+supplier_invoice_no·vehicle_no
+received/accepted/rejected_qty
+batch_id·landed_cost
+stock_ledger_entries
+item_id · warehouse_id · batch_id · serial_id · posting_at
+qty_in · qty_out · rate · value · balance_qty · balance_value
+source_type · source_id (polymorphic — every row has one)
+batches / serials
+item_id·batch_no·mfg_date
+expiry_date·supplier_batch
+parent_batch_ids(genealogy)
+stock_balances (cache)
+item_id·warehouse_id
+batch_id·qty·committed_qty
+value·updated_at
+journal_entries + journal_lines
+voucher_no · date · account_id · debit · credit · party_id
+source_type · source_id · cost_centre_id · narration
+inspections
+source_type/_id·item_id
+batch_id·result·disposition
+activity_logs
+subject_type/_id·causer_id
+event·properties(JSON)·ip
+every stock movement also posts a balanced journal entry
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 71

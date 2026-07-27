@@ -1,0 +1,5 @@
+End of specification. Any change to the requirements in this document after baseline approval should be
+raised as a written change request, assessed for effort and impact on the roadmap, and approved by the
+business owner and the project manager before development begins.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 85

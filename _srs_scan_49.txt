@@ -1,0 +1,57 @@
+Figure 10.3 — Plan-to-produce flow.
+User stories
+US-M09-01 — As a Production Planner, I want to generate work orders directly from confirmed sales orders,
+so that nothing ordered is left unmade.
+Acceptance: selecting sales order lines creates work orders with the correct item, quantity, BOM version and
+required-by date; each work order links back to its sales order so progress is visible from the order screen.
+US-M09-02 — As a Production Planner, I want to see whether material is available before I release a work
+order, so that the shop floor does not stop halfway.
+Acceptance: the release screen shows each component with required, available and shortage quantities; a
+shortage of a component marked critical blocks release; a shortage of a non-critical component shows a
+warning and requires confirmation.
+US-M09-03 — As a Shop Floor Operator, I want to record my shift's output on a tablet in under thirty
+seconds, so that data entry does not slow down production.
+Acceptance: a simplified screen showing only the operator's assigned machine and open work order, with
+large numeric input for good and rejected quantity and a dropdown of defect reasons; saving is possible offline
+and syncs when connectivity returns.
+US-M09-04 — As a Production Planner, I want to see machine-wise loading for the next seven days, so that
+I do not promise a delivery date the factory cannot meet.
+Acceptance: a chart per machine showing planned hours against available hours per day, accounting for
+shifts, holidays and planned maintenance; overloaded days appear in red.
+US-M09-05 — As an Owner, I want to know the real cost of every batch produced, so that I know which
+products actually make money.
+Acceptance: a work order costing sheet showing standard versus actual for material, labour, machine and
+overhead, with the variance in value and percentage, and a drill-down to the transactions behind each figure.
+US-M09-06 — As a Production Planner, I want rejected output to be routed either to rework or to scrap, so
+that the loss is recorded honestly.
+Acceptance: rejection at production entry requires a defect reason and a disposition (rework, scrap, or
+downgrade to a second-quality item); rework creates a linked work order, scrap posts a scrap receipt at scrap
+value, downgrade receives stock against a different item code.
+1. DEMAND
+Confirmed sales orders
+Forecast · Min stock top-up
+2. PRODUCTION PLAN
+BOM explosion · net requirement
+= demand − stock − on order
+3a. WORK ORDERS (make)
+3b. PURCHASE INDENTS (buy)
+4. WORK ORDER RELEASED — material availability checked, stock reserved
+5a. MATERIAL ISSUE
+Manual issue slip from stores
+or automatic backflush
+Batch / lot selected (FEFO)
+→ stock OUT ledger entry
+5b. PRODUCTION ENTRY
+Per shift, per machine, per operator
+Good qty · rejected qty · defect reason
+Downtime with reason code
+→ stock IN ledger entry + new batch
+5c. IN-PROCESS QC
+Triggered after flagged operations
+Pass → next operation unlocked
+Fail → rework or scrap route
+Alert N10 above threshold
+6. WORK ORDER CLOSED — actual cost computed and compared to standard
+Material + machine hours + labour + overhead vs BOM standard cost = variance report
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 49

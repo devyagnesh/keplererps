@@ -1,0 +1,77 @@
+6. Activity Logging and Audit Trail
+6.1 What must be logged
+The requirement is simple to state and demanding to implement: every action that changes data, and
+every action that reads sensitive data, must leave a permanent record. Three separate logs are
+maintained because they answer different questions and have different retention needs.
+Log Answers the questionContents Retention
+Activity Log "Who changed this record
+and what exactly did they
+change?"
+Model type and ID, event
+(created/updated/deleted/
+restored), old values, new values,
+user, IP, user agent, timestamp,
+document number for readability
+Never purged. Archived to a
+yearly partition table after 3
+years.
+Access Log "Who looked at this, and who
+tried to look at it?"
+Route, method, model viewed,
+exports and prints, failed
+permission checks (403), login,
+logout, failed login, impersonation
+start/stop
+13 months, then aggregated.
+System Log "Why did the integration or
+job fail?"
+Queue job failures, WhatsApp and
+FCM send results, scheduled task
+runs, migration runs, backup
+results, PDF generation errors
+90 days.
+Figure 6.1 — Activity logging pipeline. Logging is automatic through a model trait, not written by hand in each controller.
+6.2 Logging rules
+# Rule Detail
+L1 Logging is automatic A base model trait attaches to model events. A developer adding a
+new module gets logging for free by extending the base model.
+L2 Never log secrets password, remember_token, two_factor_secret, API keys and
+access tokens are on a global ignore list. The list is enforced centrally,
+not per model.
+L3 Only the difference is stored If a user edits a 60-column record and changes one field, the
+properties column holds one old value and one new value — not sixty.
+User saves a
+Sales Order
+Eloquent model
+saved / deleted event
+LogsActivity trait
+computes the dirty diff
+excludes ignored columns
+activity_logs table
+insert-only, no update
+STORED FOR EVERY ENTRY
+log_name
+"sales"
+subject_type + subject_id
+SalesOrder #482
+causer_id
+user who did it
+event
+created / updated
+properties (JSON)
+old {} and attributes {}
+ip_address · user_agent · batch_uuid (groups header + lines saved together) · document_no · created_at
+Record timeline
+Every document screen has a
+"History" tab showing changes
+in human language, newest first
+Admin audit screen
+Filter by user, date range,
+module, event, IP. Export to
+Excel with a reason prompt.
+Tamper resistance
+No UI or API can edit or delete
+a log row. The DB user has no
+UPDATE/DELETE grant on it.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 19

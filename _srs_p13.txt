@@ -1,0 +1,117 @@
+Industry
+Primary UOM
+& second
+UOM
+Item attributes
+needed Traceability levelSpecial production behaviour
+Rubber
+Products
+Piece / Kg Compound code,
+hardness (Shore A),
+curing time and
+temperature, mould
+code, ageing/expiry
+of compound
+Batch (compound
+lot) mandatory
+T wo-stage: compound mixing produces
+an intermediate item with a shelf life,
+then moulding consumes it. Expiry-
+based FEFO issue is mandatory.
+Furniture Piece / Set Model, dimensions,
+material (ply/MDF/
+steel), finish, colour,
+upholstery code,
+knock-down or
+assembled
+Serial number for
+high value items
+Multi-level BOM with sub-assemblies.
+Made-to-order variants are common,
+so BOM must support per-order
+customisation.
+Electrical
+Components
+Piece / Box Voltage rating,
+current rating, IP
+rating, certification
+(ISI/CE), pin type, wire
+gauge
+Serial number +
+batch
+Assembly BOM with many small
+purchased parts. Serial numbers are
+needed for warranty claims.
+Auto Parts Piece / Set Part number, OEM
+part number, vehicle
+model applicability,
+drawing revision,
+material grade,
+tolerance class
+Serial or lot, plus
+drawing revision —
+mandatory
+Customer schedules (weekly/monthly
+delivery schedules) instead of one-off
+orders. PPAP / control-plan documents
+must attach to the item.
+Steel
+Products
+Kg / Piece /
+Metre
+Grade, thickness,
+width, length, heat
+number, coating, IS/
+ASTM standard
+Heat number is
+mandatory and
+must flow from raw
+material to finished
+goods
+Weight is calculated from dimensions
+using a density formula. Cutting plans
+generate off-cuts that must return to
+stock as usable remnants.
+Aluminium
+Products
+Kg / Metre Alloy and temper
+(e.g. 6063-T6),
+section code, die
+code, weight per
+metre, anodising/
+powder-coat spec
+Batch + die + billet
+lot
+Extrusion output is measured in
+metres and billed in Kg. Die life
+tracking (number of extrusions per
+die) is required.
+Textile Metre / Kg / RollCount, GSM, width,
+weave, shade/lot
+number, shrinkage %,
+fibre composition
+Shade lot is
+mandatory —
+mixing lots causes
+customer rejection
+Heavy job-work (dyeing, printing at
+outside processors). Grey-to-finished
+conversion loses length and gains/
+loses weight; both must be recorded.
+Chemical Kg / Litre Concentration/assay
+%, density, hazard
+class, MSDS
+reference, shelf life,
+storage temperature
+Batch + expiry,
+mandatory, with
+full genealogy
+Batch process manufacturing with
+variable yield. Potency-based issue
+(issue more of a weaker lot). Expiry-
+driven FEFO. Retention samples must
+be logged.
+4.3 The industry profile record
+One row in industry_profiles, plus a JSON configuration column. Below is the shape of the configuration.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 13

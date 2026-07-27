@@ -1,0 +1,50 @@
+US-M12-02 — As a Dispatch Officer, I want e-way bill fields validated before the vehicle leaves, so that the
+truck is not stopped at a checkpoint.
+Acceptance: when the invoice value exceeds the threshold, transport mode, vehicle number, distance and
+transporter ID become mandatory; vehicle number format is validated; the e-way bill JSON is downloadable
+and, where the GSP integration is enabled, submitted directly.
+US-M12-03 — As a Customer, I want a WhatsApp message when my material is dispatched, so that I can
+arrange to receive it.
+Acceptance: alert N13 sends invoice number, vehicle number, transporter, LR number, e-way bill number and
+expected delivery date, with the invoice PDF attached.
+US-M12-04 — As an Accountant, I want the challan and the invoice to always agree, so that GST returns
+reconcile.
+Acceptance: an invoice generated from a challan copies quantities exactly and locks them; a difference is
+only possible through a documented amendment before the invoice is confirmed.
+Fields and validation — Delivery Challan
+Field Type Req. Validation rule
+Challan Number /
+Date
+Auto /
+Date
+Yes Date cannot be before the sales order date or in a closed period.
+Sales Order Select Yes Must be Confirmed or Partially Delivered, and not On Hold or Cancelled.
+Dispatch Quantity per
+line
+Decimal Yes > 0 and ≤ pending quantity plus tolerance. Available free stock must
+cover it.
+Batch / Serial
+selection
+Select Cond. Required for tracked items; only batches with positive balance in the
+dispatch warehouse are listed; expired batches are excluded.
+Transport Mode Select Yes Road / Rail / Air / Ship.
+Vehicle Number T ext Cond. Required for road transport. Pattern ^[A-Z]{2}[0-9]{1,2}[A-Z]{0,3}
+[0-9]{4}$.
+Transporter / GSTINSelect /
+T ext
+Cond. Required when an e-way bill is needed. Transporter GSTIN or transporter
+ID validated for format.
+LR / Docket Number &
+Date
+T ext / DateNo Max 30 characters; date not before the challan date.
+Distance (km) Integer Cond. 1–4000. Required for the e-way bill; determines its validity period.
+Driver Name / MobileT ext No Mobile 10 digits when entered.
+Number of PackagesInteger Yes > 0. Must equal the package count on the linked packing list.
+Gross / Net WeightDecimal No Both ≥ 0; gross must be greater than or equal to net.
+E-Way Bill NumberT ext Cond. 12 digits. Required before the vehicle leaves when the value exceeds
+the threshold.
+Proof of Delivery File No Image or PDF, max 5 MB. Uploading it sets the challan to Delivered and
+stamps the delivery date.
+MODULE M13
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 55

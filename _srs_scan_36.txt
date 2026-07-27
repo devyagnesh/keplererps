@@ -1,0 +1,50 @@
+US-M03-05 — As a Production Planner, I want to define alternative raw materials for an item, so that
+production is not stopped when the preferred grade is unavailable.
+Acceptance: an item may list substitute items with a conversion ratio; the material issue screen offers
+substitutes with a visible warning and records which substitute was used.
+Fields and validation — Item
+Field Type Req. Validation rule
+Item Code T ext Yes 3–30 characters, upper-case letters, digits, dash and slash. Unique
+including soft-deleted rows. Immutable after the first transaction.
+Item Name T ext Yes 3–150 characters. Duplicate-name warning within the same category.
+Item T ype Select Yes One of the eight types. Cannot change from a stock type to Service
+once stock exists.
+Category / Sub-
+category
+Select Yes From the category tree, maximum three levels. Sub-category options
+depend on the category chosen.
+Stock UOM Select Yes From the UOM master. Immutable once any stock transaction
+exists.
+Purchase UOM Select No Must have a conversion factor to the stock UOM defined for this item.
+Sales UOM Select No Same rule as purchase UOM.
+UOM Conversions RepeatableCond. Required if purchase or sales UOM differs from stock UOM. Factor > 0,
+up to 6 decimals. Circular conversions are rejected.
+HSN / SAC Code T ext Yes 4, 6 or 8 digits for HSN; 6 digits for SAC. Must exist in the HSN master,
+which also supplies the default GST rate.
+GST Rate Select Yes 0, 0.25, 3, 5, 12, 18 or 28 percent. Defaults from HSN; an override
+requires the item.override_tax permission.
+Cess Rate Decimal No 0–100, up to 2 decimals.
+Tracking T ype Select Yes None / Batch / Serial / Batch+Serial. Immutable once stock exists.
+Defaults from the industry profile.
+Shelf Life (days) Integer Cond. Required when expiry tracking is on. 1–3650.
+Standard Cost Decimal No ≥ 0, 4 decimals. Used for valuation when no purchase history exists.
+Selling Price Decimal Cond. Required for Finished Goods. ≥ 0. A warning appears if it is below
+standard cost.
+Minimum Selling PriceDecimal No ≥ 0. Sales below it require the sales_order.approve_below_min
+permission.
+Reorder Level Decimal No ≥ 0, per warehouse. Triggers alert N06.
+Reorder Quantity Decimal Cond. Required and > 0 when a reorder level is set.
+Minimum / Maximum
+Stock
+Decimal No Both ≥ 0; maximum must be greater than minimum when both are set.
+Lead Time (days) Integer No 0–365. Used by material requirement planning.
+Default WarehouseSelect No Must be an active leaf warehouse.
+Weight per Unit Decimal Cond. Required for steel and aluminium profiles. > 0, 4 decimals. Used for
+weight-based costing and freight.
+Item Image File No JPG or PNG, max 2 MB. Up to 5 images, one marked primary.
+Drawing /
+Specification
+File No PDF, DWG or image, max 10 MB each, with a revision number and
+revision date. Older revisions are retained.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 36

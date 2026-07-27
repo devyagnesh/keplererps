@@ -1,0 +1,67 @@
+# Rule Reason
+A5 Nothing is hard deleted. Every table
+uses soft deletes plus a cancellation
+reason where relevant.
+Audit and statutory record keeping.
+A6 Anything that talks to the outside
+world (WhatsApp, FCM, email) is
+dispatched to a queue, never called
+inline in a request.
+A slow Meta API must never make the user's Save button hang.
+A7 Every document number comes from
+the central Numbering Engine, using a
+database lock. Numbers are never
+generated with max(id)+1.
+Prevents duplicate numbers when two users save at the same second.
+A8 No raw SQL string concatenation with
+user input. Query builder or bound
+parameters only.
+SQL injection prevention.
+A9 All list screens must be server-side
+paginated and indexed. No screen may
+load more than 100 rows at once by
+default.
+Shared hosting has limited memory.
+A10 Industry-specific behaviour is driven by
+configuration, never by 
+if ($industry == 'plastic') inside
+a service.
+Otherwise the codebase becomes eleven products glued together.
+3.3 Module map
+The diagram below shows how modules depend on each other. An arrow means "needs data from".
+Modules with no incoming arrows are foundations and must be built first.
+Figure 3.2 — Module dependency map. Build order runs from top to bottom.
+FOUNDATION — built first, used by everything
+M01 Company & Masters
+M02 Users & RBAC
+M03 Item Master
+M16 Settings
+Activity Log
+M05 CRM / Leads
+enquiry → customer
+M06 Sales
+quote → order → invoice
+M07 Purchase
+indent → PO → GRN
+M14 HR & Payroll
+attendance → salary
+M04 BOM & Routing
+recipe + operations
+M09 Production
+plan → work order → output
+M08 Inventory
+the single source of stock
+M11 Maintenance
+machine / mould / die
+M10 Quality Control
+in / process / final
+M12 Dispatch
+packing → challan → e-way
+M13 Accounts & GST
+invoice → payment → return
+M15 Reports & Dashboards
+Notification Engine
+CROSS-CUTTING — available inside every module
+RBAC checks · Activity logging · PDF generation · WhatsApp & FCM alerts · Custom fields · Attachments · Approvals
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 11

@@ -1,0 +1,33 @@
+Step Action Verification
+9 Configure WhatsApp and Firebase
+credentials, then use the test
+buttons
+T est message and test push both arrive
+10 Run config:cache, route:cache
+and view:cache
+Page load times drop noticeably
+11 Import opening masters and opening
+stock, then lock the opening date
+Stock valuation matches the customer's opening figures
+12 Trigger a manual backup and
+download it
+The archive restores successfully in a test environment
+15.7 Known cPanel constraints and how the product handles them
+Constraint Product response
+No SSH on some plans A web-based installer and updater performs everything artisan would do —
+migrations, cache clearing, symlink creation — through the browser, protected by a
+one-time installation key.
+symlink() disabled The installer detects this and falls back to a real directory plus a controller route that
+serves public files, so uploads still work.
+Process and CPU limits Heavy work — imports, bulk PDFs, large reports, ledger rebuilds — always runs in the
+queue in small chunks, never in a web request.
+Inode limits Log rotation capped at 14 days; cache files pruned nightly; generated PDFs older than
+a configurable period are archived into monthly ZIP files.
+No Redis Database and file drivers are the default and are tested as first-class options, not as a
+degraded fallback.
+Shared MySQL performanceQuery design assumes no query cache; heavy reports use summary tables refreshed
+by the scheduler rather than aggregating raw rows on every view.
+Email deliverability The default is SMTP through an authenticated provider rather than the server's 
+mail() function, because shared-host IP addresses are frequently blacklisted.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 81

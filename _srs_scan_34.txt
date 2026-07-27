@@ -1,0 +1,49 @@
+User stories
+US-M02-01 — As a Super Admin, I want to create a user and send them their login details on WhatsApp, so
+that onboarding a new staff member takes one minute.
+Acceptance: the created user receives a WhatsApp template message with the login URL, username and a
+one-time password valid for 48 hours.
+US-M02-02 — As a Super Admin, I want to see the full permission list of any user in one screen, so that I can
+answer "why can't Ramesh approve this?" without guessing.
+Acceptance: an "Effective permissions" view lists every permission the user holds, showing whether it came
+from a role or a direct grant, and which role.
+US-M02-03 — As a Super Admin, I want to restrict a user to one branch, so that a branch manager cannot
+see another branch's data.
+Acceptance: every list query, report, dashboard tile and export respects the branch scope; documents from
+other branches return 403 on direct access.
+US-M02-04 — As a Store Keeper, I want a simple, large-button screen on the shop-floor tablet, so that I can
+record issues quickly with dusty hands.
+Acceptance: roles can be flagged as "simplified UI", which loads a reduced navigation with larger controls and
+only the permitted screens.
+Fields and validation — User
+Field Type Req. Validation rule
+Full Name T ext Yes 2–100 characters, letters, spaces, dot and apostrophe.
+Username T ext Yes 4–30 characters, lower-case letters, digits, dot and underscore. Unique.
+Immutable after creation.
+Email Email Yes Valid, unique among active users, max 100 characters.
+Mobile T ext Yes 10 digits for India, must not start with 0–5. Unique. Used for WhatsApp
+alerts.
+Password Password Yes Minimum 8 characters with at least one letter and one digit;
+confirmation must match; must not contain the username; checked
+against a common-password list.
+Roles Multi-
+select
+Yes At least one role. Only Super Admin may assign the Super Admin role.
+Branch Select Yes The user's home branch. Must exist and be active.
+Data Scope Select Yes All / Branch / T eam / Own. When T eam is chosen, a list of team members
+becomes required.
+Linked Employee Select No Must not already be linked to another user.
+Allowed WarehousesMulti-
+select
+Cond. Required for store and production roles. Restricts which warehouses
+appear in dropdowns.
+Require 2FA Checkbox No Inherited from the role if the role sets it; can be forced on individually
+but not off.
+Valid From / Valid
+Until
+Date No Optional access window for contract staff. Valid Until must be after Valid
+From. Login is refused outside the window.
+Is Active T oggle Yes Default on. T urning it off ends sessions, revokes API tokens and deletes
+device tokens immediately.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 34

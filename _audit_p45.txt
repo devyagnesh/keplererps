@@ -1,0 +1,49 @@
+US-M07-03 — As a Store Keeper, I want to receive part of a PO today and the rest next week, so that partial
+deliveries are handled properly.
+Acceptance: the GRN screen pre-fills pending quantity per line; receiving less leaves the PO partially received;
+over-receipt beyond tolerance is blocked.
+US-M07-04 — As an Accountant, I want the supplier bill checked against the PO rate and the GRN quantity
+before I pay, so that we do not overpay.
+Acceptance: a three-way match screen shows PO rate versus bill rate and GRN quantity versus bill quantity,
+with differences highlighted; a bill outside tolerance cannot be approved without the 
+purchase_bill.approve_mismatch permission and a reason.
+US-M07-05 — As a Purchase Manager, I want a supplier rating based on on-time delivery, quality rejection
+and price, so that I can drop poor suppliers.
+Acceptance: a monthly score per supplier from three weighted components (weights configurable), shown on
+the supplier screen with a trend and the underlying data.
+Fields and validation — Purchase Order
+Field Type Req. Validation rule
+PO Number / Date Auto /
+Date
+Yes As per the numbering engine. Date cannot be in a closed period.
+Supplier Select Yes Active party of type Supplier. Suppliers marked "not approved" are
+blocked when the approved-vendor policy is on.
+Indent / RFQ
+Reference
+Select Cond. Required when the setting "PO only against approved indent" is on.
+Delivery WarehouseSelect Yes Active leaf warehouse within the user's scope.
+Expected Delivery
+Date
+Date Yes Not before the PO date.
+Item Select Yes Active item with "Is Purchasable" ticked.
+Quantity Decimal Yes > 0. A warning appears if the quantity exceeds six months of average
+consumption.
+Rate Decimal Yes ≥ 0. The last three purchase rates for this item and supplier are shown
+beside the field. A rate more than a configurable percentage above the
+last rate requires approval.
+GST / Cess Auto Yes Reverse charge flag when the supplier is unregistered; then tax is
+recorded but not paid to the supplier.
+T olerance % Decimal No 0–20. Allowed over-receipt against this line.
+Requires InspectionCheckbox Auto Defaults from the item. When on, receipts land in quarantine.
+Fields and validation — Goods Receipt Note
+Field Type Req. Validation rule
+GRN Number / DateAuto /
+Date
+Yes Date cannot be before the PO date or in a closed period.
+Purchase Order Select Cond. Required unless direct receipt without PO is permitted, which needs the 
+grn.without_po permission.
+Supplier Invoice No. /
+Date
+T ext / DateYes Unique per supplier per financial year. Date cannot be in the future.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 45

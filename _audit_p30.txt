@@ -1,0 +1,43 @@
+10. Functional Modules
+10.1 How to read a module specification
+Every module below follows the same structure, so nothing is missed:
+Part What it tells you
+Purpose Why the module exists, in one or two sentences.
+How it works The step-by-step flow a user experiences, written as plain narrative.
+User stories Numbered requirements in the form "As a <role>, I want <goal>, so that <benefit>", each
+with acceptance criteria. These become test cases directly.
+Fields and validationEvery input field, its data type, whether it is mandatory, and the exact rules that must be
+enforced on both the client and the server.
+Business rules Conditions that are not tied to a single field — cross-document checks, status transitions,
+calculations.
+Status flow The states a document can be in and which transitions are legal.
+Permissions and alertsWhich permissions guard the module and which notifications it raises.
+Validation is always enforced twice. Client-side validation exists only for a good user experience. Server-
+side validation in a Laravel FormRequest is the real rule and must never be skipped, because the API and
+imports bypass the browser entirely.
+10.2 Module list
+Code Module Phase Depends on
+M01 Company Setup and Master Data1 —
+M02 User, Role and Permission
+Management
+1 M01
+M03 Item Master, UOM, Batch and
+Serial
+1 M01
+M04 Bill of Materials and Routing 2 M03
+M05 CRM and Lead Management 3 M01, M02
+M06 Sales — Quotation to Invoice 2 M01, M03, M08
+M07 Purchase and Vendor
+Management
+2 M01, M03, M08
+M08 Inventory and Warehouse 1 M03
+M09 Production Planning and Execution2 M03, M04, M08
+M10 Quality Control 3 M03, M07, M09
+M11 Machine, Mould and Die
+Maintenance
+3 M01, M09
+M12 Dispatch, Packing and Logistics 2 M06, M08
+M13 Accounts, Finance and GST 3 M06, M07
+M14 HR, Attendance and Payroll 4 M01, M02
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 30

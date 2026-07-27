@@ -1,0 +1,87 @@
+4. Industry Configuration Layer
+4.1 The idea in one paragraph
+Instead of building eleven products, we build one product with an Industry Profile. During installation the
+implementer picks the industry. The profile then switches on the right features, loads the right default
+masters, applies the right costing method, adds the right extra fields to the item master, and installs the
+right quality parameters and report set. Everything else in the code stays identical.
+Figure 4.1 — How one codebase becomes eleven industry-fit products.
+4.2 What actually differs between the eleven industries
+This table is the reference the developer uses when writing the profile seeders. It is deliberately specific,
+because vague requirements here cause the biggest rework later.
+Industry
+Primary UOM
+& second
+UOM
+Item attributes
+needed Traceability levelSpecial production behaviour
+Plastic
+Products
+Piece / Kg Mould code, cavity
+count, cycle time
+(sec), shot weight (g),
+material grade, colour
+masterbatch %
+Batch + machine +
+mould
+Output per shift is calculated from
+cycle time × cavities. Regrind material
+re-entry into stock must be recorded
+as a separate item.
+PVC Pipes Metre / Kg Outer diameter, wall
+thickness, pressure
+class (PN), length per
+piece, IS standard,
+colour
+Batch + extruder
+line + shift
+Continuous extrusion. Production is
+entered in running metres and
+converted to Kg using metre-per-Kg
+factor. Off-cut scrap is common and
+must be tracked.
+Packaging
+Materials
+Piece / Sq.m /
+Kg
+Ply count, GSM, flute
+type, board size
+L×W×H, printing
+colours, bursting
+strength
+Batch + reel lot Reel-to-sheet conversion with a
+wastage percentage. Job-work
+(printing at an outside vendor) is
+frequent.
+STEP 1 — Implementer selects the industry profile at setup
+Plastic
+PVC Pipes
+Packaging
+Rubber
+Furniture
+Electrical
+Auto Parts
+Steel
+Aluminium
+Textile
+Chemical
+INDUSTRY PROFILE (a JSON seed + a settings row)
+industry_profiles table · one active profile per installation
+STEP 2 — The profile drives six switches
+Feature flags
+which modules show
+Extra item fields
+e.g. cavity, GSM, denier
+Default UOM set
++ conversion rules
+Costing method
+FIFO / weighted / batch
+QC parameters
+test templates
+Print &
+report pack
+All six are stored as data. No branching on industry name is allowed inside service classes.
+A customer can override any switch afterwards from Settings without a code change.
+STEP 3 — One identical Laravel codebase serves all eleven
+Bug fixes and new features are written once and released to every customer through the updater.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 12

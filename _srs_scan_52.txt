@@ -1,0 +1,49 @@
+User stories
+US-M10-01 — As a QC Inspector, I want an inspection created automatically when material is received, so
+that nothing slips through unchecked.
+Acceptance: posting a GRN for an item with "requires inspection" creates a pending inspection, moves stock
+to quarantine, and pushes alert N05 to QC.
+US-M10-02 — As a QC Inspector, I want the system to tell me the sample size, so that inspection follows our
+sampling plan rather than guesswork.
+Acceptance: sample size is calculated from the lot quantity using a configurable plan (fixed number,
+percentage, or square-root-plus-one), and the plan used is shown on the inspection report.
+US-M10-03 — As a Production Planner, I want the next operation blocked until in-process inspection passes,
+so that we do not add value to defective material.
+Acceptance: operations flagged "QC required" create an inspection on completion; the following operation
+cannot be started while the inspection is pending or failed.
+US-M10-04 — As a Customer-facing Sales Executive, I want to send a Certificate of Analysis with the
+dispatch, so that the customer's incoming inspection is straightforward.
+Acceptance: the certificate lists the batch, test parameters, specified limits, actual readings and the pass
+result, carries the QC signature image, and can be attached to the WhatsApp dispatch alert.
+US-M10-05 — As a QC Head, I want a Pareto chart of defect reasons for the month, so that we fix the biggest
+problem first.
+Acceptance: defect quantity by reason, sorted descending with a cumulative percentage line, filterable by
+item, machine, shift, operator and supplier.
+Fields and validation — Inspection
+Field Type Req. Validation rule
+Inspection Number /
+Date
+Auto /
+Date
+Yes Date cannot be before the source document date.
+Inspection T ype Select Yes Incoming / In-process / Final / Pre-dispatch / Customer return.
+Source Document Select Yes GRN, work order or delivery challan, matching the inspection type.
+Item / Batch Select Yes Must exist on the source document.
+Lot Quantity Decimal Auto From the source document, read-only.
+Sample Size Decimal Yes > 0 and ≤ lot quantity. Suggested by the sampling plan; a manual
+override requires a reason.
+Parameter ReadingsRepeatable Yes One row per template parameter. Numeric readings must be within the
+field's own data range; a reading outside the specification limits is
+flagged but still accepted so the real value is recorded.
+Result per ParameterAuto Yes Pass when within minimum and maximum, otherwise Fail. Computed,
+not typed.
+Overall Result Select Yes Proposed by the system: Fail if any critical parameter fails. The inspector
+may not override a critical failure to Pass.
+Accepted / Rejected /
+Rework Quantity
+Decimal Yes All ≥ 0; their sum must equal the lot quantity exactly.
+Disposition Select Yes Accept / Accept with deviation / Rework / Reject / Return to supplier.
+"Accept with deviation" requires an approver with the 
+qc.approve_deviation permission and a mandatory justification.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 52

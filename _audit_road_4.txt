@@ -1,0 +1,71 @@
+6
+8
+8
+10
+12
+16
+19
+21
+27
+29
+30
+31
+33
+35
+37
+39
+41
+44
+46
+48
+51
+53
+54
+55
+58
+59
+60
+61
+71
+73
+74
+76
+78
+82
+Table of Contents
+1. Introduction
+2. Product Overview and Scope
+2.3 User Classes
+3. System Architecture
+4. Industry Configuration Layer
+5. Access Control — RBAC and Authentication
+6. Activity Logging and Audit Trail
+7. Notification Engine — WhatsApp and Firebase
+8. Document and PDF Generation Engine
+9. Customization Framework
+10. Functional Modules
+M01 — Company Setup and Master Data
+M02 — User, Role and Permission Management
+M03 — Item Master, UOM, Batch and Serial
+M04 — Bill of Materials and Routing
+M05 — CRM and Lead Management
+M06 — Sales (Quotation to Invoice)
+M07 — Purchase and Vendor Management
+M08 — Inventory and Warehouse
+M09 — Production Planning and Execution
+M10 — Quality Control
+M11 — Machine, Mould and Die Maintenance
+M12 — Dispatch, Packing and Logistics
+M13 — Accounts, Finance and GST
+M14 — HR, Attendance and Payroll
+M15 — Reports, Dashboards and Analytics
+M16 — Settings, Customization and Utilities
+M17 — Packing Units, QR Codes and Scan Operations
+11. Data Model
+12. End-to-End Business Flows
+13. Global Validation Standards
+14. Non-Functional Requirements
+15. cPanel Deployment Specification
+16. Implementation Roadmap
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 4

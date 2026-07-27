@@ -1,0 +1,9 @@
+{
+    "agents": [
+        "cursor"
+    ],
+    "cloud": false,
+    "skills": [
+        "laravel-best-practices"
+    ]
+}

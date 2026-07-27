@@ -1,0 +1,46 @@
+Field Type Req. Validation rule
+Serial Number T ext No Unique when entered.
+Purchase Date &
+Value
+Date /
+Decimal
+No Date not in the future; value ≥ 0.
+Location /
+Department
+Select Yes From the warehouse or department master.
+Capacity T ext +
+Number
+No For example tonnage for an injection machine, or output per hour for an
+extruder.
+Machine Hour RateDecimal Cond. ≥ 0. Required when the asset is used for costing.
+Cavity Count Integer Cond. Required for moulds. 1–128.
+Cycle Time (seconds)Decimal No > 0. Used to compute theoretical output and efficiency.
+Life in Cycles / ShotsInteger Cond. > 0 for moulds and dies. The running count increments from production
+entries.
+Service Interval Composite No Any combination of days, running hours and cycles. At least one must be
+set for preventive maintenance to be scheduled.
+Status Select Yes Active / Under maintenance / Under breakdown / Retired. Retired assets
+cannot be selected on new work orders.
+Documents File No Manuals, drawings, warranty papers. Up to 20 files, 20 MB each.
+MODULE M12
+Dispatch, Packing and Logistics
+Purpose
+Gets the finished goods out of the gate correctly and legally: packed and labelled, with a delivery challan,
+an e-way bill where required, and the customer told that their material has left.
+How it works
+Dispatch begins with a  packing list built against a sales order: which items, which batches or serials,
+packed into how many cartons, bundles, bags or pallets, with gross and net weight. Packing generates
+labels with QR codes so each package can be identified; the packing unit, its code, its label and every scan
+against it are specified in full in M17, and the package count on the challan is derived from scanned units
+rather  than  typed.  The  delivery  challan is  then  created  from  the  packing  list,  reducing  stock  and
+recording the vehicle, driver, transporter and LR number. Where the invoice value and distance require it,
+e-way bill details are captured and the JSON payload for the government portal is prepared. Once the
+vehicle leaves, alert N13 goes to the customer on WhatsApp with the vehicle number and expected arrival,
+and proof of delivery can be uploaded when the signed challan returns.
+User stories
+US-M12-01 — As a Dispatch Officer, I want to build a packing list by scanning batch labels, so that the
+packing list matches what is physically in the truck.
+Acceptance: scanning a batch label adds that batch to the current package; the system warns if the batch is
+not from the linked sales order's reserved stock; package totals update live.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 54

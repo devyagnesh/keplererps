@@ -1,0 +1,42 @@
+Business rules
+# Rule
+BR-06 The system must always have at least one active Super Admin. Deactivating or removing the role from the last
+one is blocked with a clear message.
+BR-07 A user cannot edit their own roles, permissions or data scope, even as Super Admin. This prevents accidental
+self-lockout and privilege escalation.
+BR-08 System roles (Super Admin) cannot be deleted or renamed; their permission set cannot be reduced.
+BR-09 Deleting a user is a soft delete. Their name remains visible on documents they created, shown as "Ramesh
+Patel (inactive)".
+BR-10 Any change to roles or permissions writes an activity log entry listing exactly which permissions were added
+and removed.
+MODULE M03
+Item Master, UOM, Batch and Serial
+Purpose
+Defines everything the factory buys, makes, stores and sells. This is the most heavily referenced master in
+the system, and the place where the industry profile has the biggest visible effect.
+How it works
+An item belongs to a type — Raw Material, Consumable, Semi-Finished, Finished Goods, Packing Material,
+Scrap, Spare Part or Service. The type controls which sections of the form appear: a Finished Goods item
+shows sales price and BOM links; a Raw Material shows purchase settings and reorder levels; a Service item
+hides all stock settings. The industry profile adds its own attribute block (cavity count for plastic, GSM for
+packaging, alloy for aluminium) as configured fields. Items can carry batch numbers, serial numbers, both,
+or neither, and this choice is locked once stock exists.
+User stories
+US-M03-01 — As a Store Keeper, I want each item to have a unique code and a scannable barcode, so that
+receiving and issuing material is fast and error-free.
+Acceptance: the item code is auto-generated from a configurable pattern or typed manually; a Code128
+barcode is printable from the item screen; scanning the barcode in any item field selects that item.
+US-M03-02 — As a Purchase Officer, I want a reorder level and reorder quantity per item per warehouse, so
+that the system tells me what to buy before we run out.
+Acceptance: when available stock falls to or below the reorder level, alert N06 fires and the item appears on
+the "Items to reorder" report with a suggested quantity.
+US-M03-03 — As a QC Inspector, I want every chemical batch to carry a manufacturing date and expiry date,
+so that expired material is never issued to production.
+Acceptance: for items with expiry tracking, issue screens exclude expired batches, warn on batches expiring
+within a configurable window, and default to the earliest expiry (FEFO).
+US-M03-04 — As a Sales Executive, I want to see the available-to-promise quantity while taking an order, so
+that I do not promise stock that is already committed.
+Acceptance: the item picker shows physical stock, committed to other orders, in production, and free-to-sell,
+per warehouse.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 35

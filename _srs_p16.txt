@@ -1,0 +1,68 @@
+5. Access Control — RBAC and Authentication
+5.1 The model in plain words
+A user is a person who logs in. A role is a job title such as Store Keeper. A permission is one specific thing
+that can be done, such as "approve a purchase order". Permissions are given to roles, roles are given to
+users. A user may hold more than one role, and may also be given or denied a single permission directly,
+which overrides the role.
+On top of this the system adds two more layers that most small ERPs miss:
+Record scope — which records the user may see. A sales executive with the "view sales order"
+permission still only sees orders of customers assigned to them.
+Field rules — which columns the user may see or edit. A production planner may open a sales order
+but must not see the selling price.
+Figure 5.1 — Access control data model and the four gates every request passes.
+5.2 Permission naming convention
+Every permission is named module.action in lower snake case. This is not cosmetic — the settings screen
+groups permissions automatically by the part before the dot, and the seeder generates them from a single
+array.
+Action suffix Example Meaning
+.view sales_order.view Open the list and the detail screen (read only)
+.create sales_order.create Create a new draft record
+.update sales_order.update Edit a record that is still editable in its current status
+.delete sales_order.delete Soft delete a draft record
+.approve sales_order.approve Move a record from Pending Approval to Approved
+.cancel sales_order.cancel Cancel a confirmed record, with a mandatory reason
+.print sales_order.print Generate the PDF
+.export sales_order.export Download Excel or CSV — treated as a sensitive
+permission and always logged
+• 
+• 
+users
+id,name,email
+password,mobile
+employee_id,branch_id
+is_active,last_login_at
+two_factor_secret
+fcm_tokens(relation)
+roles
+id,name,slug
+description
+is_system(locked)
+level(forapprovals)
+permissions
+id,name(module.act)
+module_group
+label,sort_order
+is_dangerous
+model_has_roles
+role_has_perms
+direct permission override (model_has_permissions) — beats the role
+user_data_scopes
+user_id,scope_type
+(all/branch/team/own)
+branch_ids[],warehouse_ids[]
+customer_group_ids[]
+field_permissions
+role_id,model,field_name
+can_view(bool)
+can_edit(bool)
+masked_display(e.g.****)
+approval_rules
+document_type,condition
+(amount>X,discount>Y%)
+approver_role_id,sequence
+escalate_after_hours
+EVERY REQUEST PASSES THROUGH FOUR GATES
+1. Is the user logged in and active? → 2. Does the user hold the permission? → 3. Is this record inside the user's scope? → 4. Are the submitted fields editable by this role?
+Failing gate 2, 3 or 4 returns HTTP 403 and writes an entry to the security log.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 16

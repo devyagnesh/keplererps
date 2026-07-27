@@ -1,0 +1,49 @@
+1. Introduction
+1.1 Purpose of this document
+This document describes, in complete detail, what the Manufacturing ERP System must do and how it must
+behave. It is the single agreed reference for everyone building, testing, buying or approving the system. If
+something is not written here, it is not part of version 1.0 and must go through a change request.
+The document answers four questions for every part of the system:  what does the user want to do
+(user stories), what data does the system need (field tables), what is not allowed (validation rules),
+and what happens step by step (process flows and diagrams).
+1.2 The business problem
+Small and medium manufacturers in India typically run their factory on a mixture of paper registers, Excel
+sheets, WhatsApp messages and a basic accounting package. This causes five recurring problems:
+Nobody knows the true stock. Physical stock and book stock differ because issues to production are
+not recorded on time.
+Orders slip. A sales order is accepted without checking whether raw material or machine capacity is
+available.
+Costing is guesswork. The real cost of a produced item — material plus scrap plus labour plus
+machine hours — is never calculated.
+No traceability. When a customer complains about a batch, nobody can trace which raw material lot,
+which machine and which operator produced it.
+Information does not reach people. The store keeper does not know a dispatch is due today; the
+owner does not know a payment is overdue.
+This ERP solves all five, and pushes the fifth one out to people's phones through WhatsApp and push
+notifications instead of waiting for them to log in.
+1.3 Why one product for eleven industries
+Plastic moulding, PVC pipe extrusion, corrugated box making, rubber compounding, furniture assembly,
+electrical  component  assembly,  auto  part  machining,  steel  fabrication,  aluminium  extrusion,  textile
+processing and chemical batch production look very different on the shop floor. But underneath, all eleven
+follow the same shape:
+Buy raw material  →  Store it  →  Convert it using a recipe and a machine  →  Check
+quality  →  Store the finished goods  →  Dispatch and invoice
+The differences are in the details: a plastic moulder cares about mould cavity count and cycle time; a pipe
+extruder cares about running metres and coil length; a chemical plant cares about batch potency and
+expiry; a textile mill cares about shade lots and shrinkage. These are  configuration differences, not
+code differences. Section 4 describes the Industry Configuration Layer that turns one codebase into
+eleven industry-fit products.
+1.4 Scope of version 1.0
+In scope Out of scope (future versions)
+All 16 functional modules listed in Section 10 Multi-company consolidation across separate legal entities
+Single company, unlimited branches, warehouses and
+users
+Native iOS / Android app (a responsive web app is
+provided; a Flutter client is a Phase 4 item)
+1. 
+2. 
+3. 
+4. 
+5. 
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 6

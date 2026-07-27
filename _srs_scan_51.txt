@@ -1,0 +1,45 @@
+Field Type Req. Validation rule
+Downtime (minutes)Integer No 0 to shift duration. Requires a downtime reason when greater than zero
+(no material, machine breakdown, power cut, mould change, no
+operator, planned maintenance).
+Consumed MaterialsRepeatableCond. Auto-filled from the BOM for the produced quantity when backflush is
+on; editable with a variance reason if actual consumption differs by
+more than a configurable percentage.
+By-products / ScrapRepeatable No Item, quantity ≥ 0, warehouse. Received into stock at scrap valuation
+rate.
+Business rules
+# Rule
+BR-29 A work order cannot be released if a component marked critical is short. The shortage list is shown with the
+quantity needed and the earliest expected purchase receipt.
+BR-30 Backflush consumption uses the BOM quantity for the good quantity produced, including wastage percentage.
+If the resulting consumption would drive a component negative, the entry is blocked and the user is told which
+component is short.
+BR-31 Cost of the produced item = total material consumed value + (machine hours × machine rate) + (labour hours
+× labour rate) + overhead percentage, divided by good quantity. Scrap and by-product value is credited before
+division.
+BR-32 Closing a work order is irreversible without the reopen permission and reverses nothing; a wrongly closed
+order is corrected by a stock adjustment with a reason.
+BR-33 Rejection percentage above a configurable threshold (default 5%) triggers alert N10 to QC and management
+immediately, not at the end of the shift.
+BR-34 Batch genealogy is written at production entry: the output batch records every input batch consumed, with
+quantities, enabling both backward and forward traceability.
+MODULE M10
+Quality Control
+Purpose
+Ensures material is checked at three points — when it arrives, while it is being made, and before it is
+dispatched — and that the results are recorded, traceable and reportable to customers who ask for a
+certificate.
+How it works
+A QC template is defined per item or item category and per inspection stage. It lists the parameters to
+test,  each  with  a  type  (numeric  with  minimum,  maximum  and  target;  a  pass/fail  choice;  or  a  text
+observation), a test method reference, and whether the parameter is critical. When a triggering event
+occurs — a GRN posted, an operation completed, a batch finished — the system creates an inspection
+automatically and notifies QC.
+The inspector records readings against a sample. The system evaluates each parameter against its limits
+and proposes an overall result. A failure of any critical parameter forces rejection. The inspector then
+records the disposition: accept, accept with deviation (requires an approver and a note), rework, or reject.
+Stock moves accordingly — from quarantine to the main store on acceptance, or to a rejection area on
+rejection. For customers who require it, a Certificate of Analysis is generated as a PDF from the recorded
+readings.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 51

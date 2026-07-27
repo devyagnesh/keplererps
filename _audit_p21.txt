@@ -1,0 +1,67 @@
+7. Notification Engine — WhatsApp and Firebase
+7.1 Why this matters
+In a real factory, people do not sit in front of the ERP . The store keeper is at the gate, the supervisor is on
+the shop floor, the owner is travelling. An ERP that requires people to log in to discover a problem will not
+change how the business runs. So the ERP must push information out — to WhatsApp for people outside
+the system (customers, suppliers, transporters) and to push notifications for people inside it (staff with the
+app or browser open).
+7.2 Architecture of the engine
+Figure 7.1 — Event to delivery pipeline. Every attempt is recorded so failures are visible, not silent.
+7.3 Alert catalogue
+These alerts ship with the system. Each one can be switched on or off, re-targeted to different roles, and re-
+worded, from the Settings screen. "W" = WhatsApp, "P" = push, "E" = email, "I" = in-app.
+Code Event Default recipientsChannelsMessage content
+N01 Quotation sent Customer contact W, E Quotation number, validity date, total value,
+PDF attached
+N02 Sales order confirmedCustomer, Sales Exec,
+Production Planner
+W, P, I Order number, items, promised delivery date
+N03 Order needs approval
+(discount or credit limit)
+Sales Manager P, I, W Order number, customer, discount %, direct
+approve link
+N04 Purchase order
+approved
+Supplier contact,
+Purchase Officer
+W, E PO number, items, delivery date, PDF
+attached
+N05 Material received (GRN
+posted)
+Purchase Officer, QC
+Inspector
+P, I GRN number, supplier, items awaiting
+inspection
+1. SOMETHING HAPPENS — a domain event is fired
+Order confirmed
+Stock below min
+PO awaiting approval
+Goods dispatched
+Payment overdue
+QC batch rejected
+2. NOTIFICATION RULE ENGINE
+Looks up notification_rules: is this event enabled? who receives it? which channels?
+Applies conditions, quiet hours, and per-user opt-out preferences
+3. QUEUE — jobs pushed to the "notifications" queue
+The user's Save button returns immediately. Nothing blocks on a slow API.
+WhatsApp Channel
+Meta Cloud API /messages
+Approved templates only
+PDF sent as a document
+Delivery webhook updates status
+For: customers, suppliers, staff
+Firebase FCM Channel
+HTTP v1 API, OAuth2 service acct
+Per-device tokens, topic support
+Deep link opens the record
+Web push + Android + iOS
+For: internal staff
+Email + In-App
+SMTP with PDF attachment
+Bell icon with unread count
+Database notifications table
+Always on as a fallback
+For: everyone
+4. notification_deliveries — one row per attempt: channel, status, provider id, error, retry count
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 21

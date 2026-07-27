@@ -1,0 +1,52 @@
+Packing Units, QR Codes and Scan Operations
+Purpose
+Gives every physical package that leaves the production line — a box, a carton, a drum, a bag, a bundle, a
+roll, a crate — its own permanent identity, printed as a QR code on a sticker. From that point on the
+package can be received into stock, moved, picked, loaded and dispatched by scanning it, instead of by
+typing item codes and quantities into a screen. The same scan is also the fastest way to answer the three
+questions people ask on the shop floor and at the gate: what is inside this?, whose order is it for?, and
+where should it be?
+How it works
+When goods finish production and pass inspection, the operator packs them and creates a packing unit in
+the system — one record per physical package. The system allocates a permanent code, prints a label with
+a QR code, and the operator sticks it on the box. Packing units can be put inside other packing units:
+twenty cartons on one pallet, four drums in one crate. This is called  nesting, and it is what makes a
+warehouse manageable — one scan of the pallet label handles everything stacked on it.
+After that, the QR code is simply an input method. Scanning a label at the goods-in point posts a stock-in.
+Scanning it at the loading bay against a delivery challan posts a stock-out. Scanning it anywhere else
+opens a read-only information screen. The scanner can be a phone camera through the browser, or a cheap
+USB or Bluetooth 2D scanner that behaves like a keyboard — the system supports both, because most
+factories will buy the ₹3,000 scanner for the gate and use phones everywhere else.
+The single most important rule in this module. A QR code does not move stock. It identifies what to
+move; the stock ledger described in M08 still performs the movement and remains the only source of truth for
+quantity. A packing unit is a container reference recorded on a ledger entry, never a second parallel stock
+system. If the packing unit records and the stock ledger can ever disagree, the design is wrong.
+10.17.1 Packing hierarchy
+Figure 10.4 — Packing hierarchy. A unit at any level may contain items, or child units, or both. Depth is limited to five levels
+to keep queries fast on shared hosting.
+Which levels a customer actually uses is an industry profile setting (§4), not a code change. A PVC pipe
+plant works in bundles and needs Level 2 only. A chemical plant works in drums with an inner liner and
+uses Levels 1 and 2. A packaging or auto-parts supplier feeding an OEM will use Levels 2 and 3, because
+the customer's own goods-in process expects a pallet label.
+10.17.2 What the QR code actually contains
+This is the decision that is most often made badly, and it is expensive to reverse once ten thousand labels
+are stuck on drums. The QR code stores a short random code and nothing else, wrapped in a URL:
+LEVEL 0
+loose
+Item+Batch/Serial—bulkstock NoQR.Quantitylivesinthestockledgeronly.
+LEVEL 1
+primary
+Bag·Bottle·Roll·Coil·Innerpack QRoptional.Usedwherethecustomerbuystheinnerpack.
+LEVEL 2
+shipping
+Box·Carton·Drum·Crate
+Bundle·Jumbobag
+QRMANDATORY.Thisistheunitthatphysicallymoves,
+andthelevelallstock-inandstock-outscanningworksat.
+LEVEL 3
+handling
+Pallet·Stillage·Trolley QRoptional.Onescanactsoneverychildunitstackedonit.
+LEVEL 4
+Container·Vehicleload QRoptional.Usedforexportsandfull-truckmovements.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 62

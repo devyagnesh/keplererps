@@ -1,0 +1,44 @@
+Situation Behaviour
+T oken expired Stop the channel, raise a high-priority alert, and show a red banner on the dashboard for
+Super Admin. Do not keep burning attempts.
+7.5 Firebase Cloud Messaging integration
+7.5.1 Setup fields (Settings → Integrations → Firebase)
+Field Type RequiredValidation and notes
+Enable Push T oggle Yes —
+Service Account JSON File uploadYes Must be valid JSON containing project_id, client_email and 
+private_key. Stored outside the public web root, permissions
+0600, encrypted at rest.
+Project ID T ext (read-
+only)
+Auto Extracted from the uploaded JSON and shown for confirmation.
+Web Push VAPID key T ext Yes for
+browser
+push
+From Firebase console → Cloud Messaging → Web configuration.
+Web API key, Auth domain,
+Sender ID, App ID
+T ext Yes for
+browser
+push
+Used by the front-end SDK. Safe to expose in the browser, unlike
+the service account.
+Default notification icon
+and colour
+File /
+colour
+No Icon 192×192 PNG.
+Send test push Button — Sends to the admin's own registered devices and shows the raw
+response.
+7.5.2 Device token lifecycle
+Stage Behaviour
+Registration On login, the browser or app requests permission and posts the FCM token to POST /api/
+devices with device type, model and app version. Stored in user_devices (user_id, token
+unique, platform, last_seen_at).
+Refresh FCM rotates tokens. The client posts the new token on every app start; the old row is
+replaced, matched on the device installation ID.
+Cleanup A response of UNREGISTERED or INVALID_ARGUMENT deletes the token immediately. A weekly
+job removes tokens unused for 90 days.
+Logout / deactivate Deleting the user or setting is_active = false removes all their device tokens in the same
+transaction.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 25

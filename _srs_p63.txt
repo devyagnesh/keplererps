@@ -1,0 +1,63 @@
+https://erp.company-domain.com/q/7K4M9XQ2PB
+The code is 10 characters drawn from Crockford Base32 — digits and uppercase letters with I, L, O and U
+removed because people and OCR confuse them with 1, 0 and V. That gives roughly 1015 possible codes,
+allocated randomly rather than in sequence, with the last character acting as a check digit so a mistyped
+fallback code is rejected instead of silently matching another package.
+Design choice Reason
+Store an identifier, not the dataPrinted data goes stale the moment the box moves warehouse, is re-allocated
+to a different order, or has its batch re-graded after re-testing. An identifier
+resolved live against the database is never stale.
+Random, not sequential A sequential code tells anyone who scans one label how many units you have
+shipped this year. It also lets a stranger guess valid codes.
+Short payload Fewer characters means larger, thicker modules at the same printed size,
+which is what makes a scan work on a dusty drum in poor light. This label
+needs to survive a warehouse, not a boardroom.
+URL form A phone's default camera app opens it without any app installed — useful for a
+customer's QC person or a transporter. Staff scanning inside the ERP get the
+same code without leaving the app.
+Never encode price or customerThe label is visible to the transporter, the loading crew and the receiving party.
+Commercial terms must be looked up behind a login, not read off the box.
+Common mistake to avoid. Do not encode a JSON blob of item, batch, quantity, order and customer into the
+QR. It produces a dense code that fails to scan at arm's length, it leaks pricing and customer names to
+everyone who handles the box, and it becomes wrong the first time anything about the package changes.
+Every serious warehouse system stores a licence-plate identifier and looks the rest up.
+10.17.3 Label design and physical durability
+Figure 10.5 — Label anatomy at 100 × 75 mm. Layout, size and which blocks appear are a label template (C4, §9) — not
+hard-coded.
+Package type Label stock Why
+Carton, box, bundle Coated paper, permanent
+adhesive
+Cheapest option and adequate. Dry, indoor, short life.
+Drum, jerrycan
+(chemicals)
+Polyester or polypropylene
+synthetic
+Survives oil, solvent splash, condensation and outdoor
+storage. Paper labels lift off drums within days.
+SHREEPOLYMERSPVTLTD
+Unit2—Jamnagar·GSTIN24AAACS0000A1Z5
+PVCPIPE110mm6kg
+ITEMPVC110-6K·IS4985·GradeA
+BATCH
+PVC110/2607/014
+MFG12-07-2026
+USEBEFORE11-07-2029
+NETQUANTITY
+25.000KG
+50PCS·GROSS26.400KG
+7K4M 9XQ2 PB
+BOX12OF40
+WO/26-27/00508·SO/26-27/00042·RACKA-12 REPRINTZONE
+Companyblock—fromM01,fixedperplant
+Itemnamelargeenoughtoreadfrom2metres
+Batchanddates—thetraceabilityanchor.
+PrintedastextsothelabelstillworksiftheQRisdamaged.
+Netquantityisthebiggestnumberonthelabel—
+itiswhatthestorekeeperandthedriveractuallycheck.
+QR≥25mmsquare,errorcorrectionlevelQ,
+4-modulequietzone,printedat300dpiorbetter.
+Human-readablecodewithcheckdigit—thefallback
+PackagenofN,sourceworkorder,reservedorder.
+AdiagonalREPRINTwatermarkisstampedhereonanyre-issue.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 63

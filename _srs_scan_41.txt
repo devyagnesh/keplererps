@@ -1,0 +1,47 @@
+Field Type Req. Validation rule
+Stage Select Yes Defaults to New. Moving to Won requires conversion; moving to Lost
+requires a reason.
+Priority Select No Hot / Warm / Cold. Default Warm.
+Next Follow-up DateDate Cond. Required unless the stage is Won or Lost. Cannot be more than 180 days
+ahead.
+Follow-up Log Repeatable No Date, mode (call, visit, email, WhatsApp), remark (max 500 characters),
+next action date. Entries cannot be edited after 24 hours, only
+appended.
+MODULE M06
+Sales — Quotation to Invoice
+Purpose
+Runs the complete order-to-cash cycle: quoting a price, taking a confirmed order, reserving or producing
+the goods, delivering them and raising a GST-compliant invoice.
+How it works
+A quotation is prepared with items, quantities, rates from the customer's price list, discounts and taxes,
+and has a validity date. If the customer accepts, one click converts it into a sales order without retyping.
+The sales order checks stock availability and the customer's credit limit. If either fails, it routes to the
+appropriate approver rather than being blocked outright. A confirmed order commits stock — the quantity
+is no longer free to sell to someone else, though it is still physically present.
+From the sales order, the business either dispatches from stock or raises a work order for production.
+Dispatch creates a delivery challan which physically reduces stock. The tax invoice can be raised from
+the challan (common for regular supply) or directly from the order (common when goods and invoice travel
+together). Partial deliveries and partial invoicing are supported throughout, with each document showing
+pending quantities.
+Figure 10.2 — Sales order status flow.
+User stories
+US-M06-01 — As a Sales Executive, I want the item rate to fill in automatically from the customer's price list,
+so that I quote consistent prices.
+Acceptance: rate is picked in this order — customer-specific rate, then customer group price list, then item
+selling price. The source of the rate is shown as a tooltip.
+DRAFT
+PENDING APPROVAL
+CONFIRMED
+IN PRODUCTION
+READY
+PARTIALLY DELIVERED
+DELIVERED
+INVOICED
+CLOSED
+CANCELLED
+ON HOLD
+Legal transitions only. A CONFIRMED order can be cancelled (releasing committed stock) but an INVOICED order cannot — a credit note is required instead.
+ON HOLD can be entered from CONFIRMED or IN PRODUCTION (customer asked to pause) and returns to the same state it left.
+Every transition writes an activity log entry with the old status, new status, user, timestamp and reason where a reason is required.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 41

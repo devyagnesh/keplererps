@@ -1,0 +1,46 @@
+US-M04-02 — As a Production Planner, I want to create a new version of a BOM when the design changes,
+so that old work orders still show what was actually used.
+Acceptance: versions are numbered automatically; existing open work orders keep their original version; new
+work orders pick the active version by date.
+US-M04-03 — As a Costing user, I want the system to calculate the standard cost of a finished item from its
+BOM, so that I know whether the selling price is profitable.
+Acceptance: cost = sum of component costs (at the chosen valuation) + operation costs (machine rate ×
+time + labour rate × time) + configurable overhead percentage; a "rolled-up cost" view explodes sub-
+assemblies.
+US-M04-04 — As a Production Planner, I want to mark an operation as outsourced, so that the system
+creates a job-work challan instead of a shop-floor task.
+Acceptance: outsourced operations require a vendor and a rate; releasing the work order generates a job-
+work issue with material sent out, and receipt against it reconciles quantity and scrap.
+US-M04-05 — As a Production Planner, I want to record by-products and scrap that come out of the
+process, so that regrind and off-cuts return to stock with a value.
+Acceptance: a BOM may list output items besides the main product, each with an expected quantity and a
+cost-allocation percentage; production entry receives them into stock automatically.
+Fields and validation — BOM header
+Field Type Req. Validation rule
+BOM Number Auto Yes From the numbering engine. Unique.
+Finished Item Select Yes Must be an item with "Is Manufacturable" ticked. Cannot appear as its
+own component at any level.
+Version T ext Auto Incremented automatically. Unique per item.
+Output Quantity Decimal Yes > 0, up to 4 decimals. The quantity the recipe produces — often 1,
+sometimes 100 or 1000 for small parts.
+Output UOM Select Auto T aken from the item's stock UOM, shown read-only.
+Valid From / Valid T oDate Yes /
+No
+Valid From is required and cannot overlap another active version of the
+same item. Valid T o, if set, must be after Valid From.
+Is Active T oggle Yes Only one active version per item per date range.
+Overhead % Decimal No 0–100, 2 decimals. Applied to the sum of material and operation costs.
+Notes / Process
+Instructions
+T extarea No Max 2000 characters. Prints on the work order sheet.
+Fields and validation — BOM component line
+Field Type Req. Validation rule
+Component Item Select Yes Must exist and be active. Cannot equal the finished item. Circular
+reference across levels is detected and rejected with the path shown.
+Quantity Decimal Yes > 0, up to 4 decimals. This is the quantity needed for the whole BOM
+output quantity, not per unit.
+UOM Select Yes Must be convertible to the component's stock UOM.
+Wastage % Decimal No 0–100, 2 decimals. Default 0. A value above 25% shows a confirmation
+prompt because it is usually a typing error.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 38

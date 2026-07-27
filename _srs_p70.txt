@@ -1,0 +1,20 @@
+Module Relationship
+M08 — Inventory Owns the quantity. Packing units add the container dimension to ledger entries and a
+package-level view of the same stock.
+M09 — Production Packing follows the production entry and is the point at which finished goods become
+individually identifiable.
+M10 — Quality ControlBatch inspection status is read at every dispatch scan. Certificates of analysis are produced
+per package.
+M12 — Dispatch The packing list is now built from scanned units rather than typed. Package count on the
+challan is derived, not entered.
+M13 — Accounts Invoice package counts and weights come from the scanned units, which is what the e-way
+bill and the transporter's receipt must agree with.
+§12.3 — TraceabilityTraceability moves from batch level to package level: not "which customers got this batch"
+but "which box went where, and when was it scanned".
+Scope discipline. Full GS1 compliance — GTIN, SSCC and GS1 Digital Link — is out of scope for version 1 and
+should stay out until a customer's own buyer demands it. What version 1 must do is leave room for it: keep a
+GTIN field on the item master and an SSCC field on the packing unit, both unused. Retrofitting those two
+columns later is an afternoon; retrofitting a coding scheme that assumed they would never exist is a migration
+across every label ever printed.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 70

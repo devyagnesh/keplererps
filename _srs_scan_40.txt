@@ -1,0 +1,54 @@
+Figure 10.1 — Lead stage flow.
+User stories
+US-M05-01 — As a Sales Executive, I want a reminder on my phone for today's follow-ups, so that I do not
+lose an enquiry by forgetting to call.
+Acceptance: a push notification each morning listing today's follow-ups with a deep link; overdue follow-ups
+are highlighted in red on the lead list.
+US-M05-02 — As a Sales Manager, I want duplicate leads detected automatically, so that two executives do
+not call the same customer.
+Acceptance: on save, the system checks mobile number, email and company name against existing leads and
+customers, and shows possible matches with an option to merge or continue.
+US-M05-03 — As a Sales Manager, I want to import leads from an IndiaMART export, so that enquiries reach
+the team the same day.
+Acceptance: a mapping screen matches file columns to system fields, remembers the mapping for next time,
+validates rows, and reports imported and rejected counts.
+US-M05-04 — As an Owner, I want a funnel report showing how many leads are in each stage and the
+conversion percentage per executive, so that I can see who is performing.
+Acceptance: a funnel chart with drill-down, filterable by date range, source, executive and product category.
+Fields and validation — Lead
+Field Type Req. Validation rule
+Lead Number Auto Yes From the numbering engine.
+Company Name T ext Yes 2–150 characters.
+Contact Person T ext Yes 2–100 characters.
+Mobile T ext Yes 10 digits (India). Duplicate check across leads and parties.
+Email Email No Valid format if entered.
+Source Select Yes Website / IndiaMART / TradeIndia / Referral / Exhibition / Cold call / Walk-
+in / Other. "Other" requires a note.
+City / State T ext /
+Select
+Yes State from the master.
+Product Interest Multi-
+select
+Yes At least one item or item category.
+Estimated Value Decimal No ≥ 0. Used for the pipeline value report.
+Expected Closing
+Date
+Date No Cannot be in the past on creation.
+Assigned T o Select Yes An active user holding a sales role. Defaults by the round-robin rule.
+NEW
+just received
+CONTACTED
+first call done
+QUALIFIED
+real requirement
+QUOTED
+quotation sent
+NEGOTIATION
+price discussion
+WON → Customer
+LOST (+ reason)
+A lead may be marked LOST from any stage; a mandatory loss reason is captured (price, quality, delivery time, competitor, no response, other).
+Backward movement is allowed and logged. Every stage change records who changed it, when, and the remark.
+Leads with no activity for N days (default 7) appear on a "stale leads" report and alert the sales manager.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 40

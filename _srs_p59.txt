@@ -1,0 +1,48 @@
+Fields and validation — Employee (selected fields)
+Field Type Req. Validation rule
+Employee Code Auto / T extYes Unique, immutable after creation.
+Name T ext Yes 2–100 characters.
+Date of Joining Date Yes Not in the future. Attendance before this date is rejected.
+Date of Birth Date Yes Age must be at least 18 years at the joining date — a hard block, since
+employing minors is illegal.
+Department /
+Designation
+Select Yes From the masters.
+Employment T ypeSelect Yes Permanent / Contract / T emporary / Apprentice.
+Shift Select Yes From the shift master; can be overridden per day by a roster.
+Salary Structure Select Yes Components must sum correctly; a percentage-of-basic component
+requires basic to be defined first.
+PF / ESI / UAN
+numbers
+T ext Cond. Required when the corresponding scheme is applicable. UAN is 12 digits;
+ESI is 17 digits.
+Bank account & IFSCT ext Cond. Required for bank-transfer salary. IFSC pattern validated; account
+number entered twice.
+Biometric Device
+Code
+T ext No Unique. Used to match punch imports.
+Date of Leaving Date No Must be after joining. Setting it deactivates the employee and blocks
+future attendance.
+Privacy note. Employee personal data is sensitive. Access to salary and personal identification fields must be
+restricted through field permissions to HR roles only, and every view of a salary record is recorded in the access
+log.
+MODULE M15
+Reports, Dashboards and Analytics
+Purpose
+Turns the data captured everywhere else into decisions. A report that nobody opens is wasted work, so the
+report set is deliberately focused on the questions factory owners actually ask.
+Standard report set
+Area Reports
+Sales Sales register · Item-wise sales · Customer-wise sales · Sales executive performance · Quotation
+conversion ratio · Pending order status · Order versus dispatch versus invoice reconciliation · Product
+profitability · Customer ageing
+Purchase Purchase register · Item-wise purchase and rate trend · Supplier-wise purchase · Pending PO status ·
+Purchase versus indent analysis · Supplier performance scorecard · GRN pending inspection
+Inventory Stock summary and stock ledger · Batch-wise and expiry-wise stock · Stock valuation as at a date ·
+Slow-moving and dead stock · Reorder level report · Stock ageing · Physical count variance ·
+Warehouse-wise and bin-wise stock · Material consumption analysis
+Production Daily production report · Machine-wise output and utilisation · Shift-wise efficiency · Operator
+productivity · Work order status · Planned versus actual quantity and cost · Scrap and rejection
+analysis · Downtime analysis by reason · Overall equipment effectiveness
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 59

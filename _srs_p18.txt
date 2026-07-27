@@ -1,0 +1,20 @@
+Requirement Rule
+Hashing Bcrypt with cost 12, or Argon2id where the PHP build supports it.
+Brute force protection Maximum 5 failed attempts per email plus IP within 10 minutes, then a 15-minute
+lockout. Every lockout raises a security alert to Super Admin.
+Session Idle timeout configurable, default 120 minutes. Absolute timeout 12 hours. Session
+fixation prevented by regenerating the session ID on login.
+Concurrent sessions Optional setting to allow only one active session per user; logging in elsewhere ends the
+previous session.
+Password reset Signed token valid for 60 minutes, single use. Delivered by email and optionally by
+WhatsApp. The reset link never contains the user's password or email in plain text in a
+query string that is logged.
+First login Users created by an admin receive a temporary password and must change it before
+reaching any screen.
+API access Laravel Sanctum personal access tokens, scoped to permissions, with a visible token list
+and one-click revoke per token.
+Impersonation Super Admin may "log in as" another user for support. The banner is always visible, the
+session is time limited to 30 minutes, and every action during impersonation is logged
+with both user IDs.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 18

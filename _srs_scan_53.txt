@@ -1,0 +1,41 @@
+Field Type Req. Validation rule
+Inspector Auto Yes The logged-in user; cannot be changed.
+Attachments File No T est certificates, photographs of defects. Up to 10 files, 10 MB each.
+MODULE M11
+Machine, Mould and Die Maintenance
+Purpose
+Keeps the assets that actually make the product running: machines, moulds, dies and tools. In plastic,
+rubber, aluminium and steel, the mould or die is often more valuable and more fragile than the machine,
+and its life must be tracked in shots or cycles, not only in days.
+How it works
+Every asset has a register entry with its identification, purchase details, capacity and location. T wo kinds of
+maintenance are tracked. Preventive maintenance is scheduled by calendar (every 90 days), by running
+hours, or by cycle count (every 50,000 shots for a mould), whichever comes first; the system raises a task
+and an alert before it is due.  Breakdown maintenance is logged when something fails: the time it
+stopped, the reason, the action taken, spare parts consumed from stock, the time it restarted, and the
+resulting downtime cost. Cycle counts increment automatically from production entries, so mould life is
+tracked without extra data entry.
+User stories
+US-M11-01 — As a Maintenance Engineer, I want an alert before a mould reaches its service interval, so
+that I service it during a planned stop rather than mid-order.
+Acceptance: alert N12 fires at a configurable percentage of the interval (default 90%) and again when due;
+the mould appears on the maintenance-due dashboard.
+US-M11-02 — As a Production Planner, I want to see which machines are down right now, so that I can
+reschedule work orders.
+Acceptance: a live machine status board showing Running, Idle, Under breakdown or Under maintenance,
+with the affected work orders listed against each stopped machine.
+US-M11-03 — As an Owner, I want to know the total downtime and its cost per machine this month, so that I
+can decide whether to replace a machine.
+Acceptance: a report of downtime hours by reason and machine, valued at the machine's hourly rate plus lost
+production value, with a month-on-month trend.
+US-M11-04 — As a Maintenance Engineer, I want spare parts issued against a breakdown to come out of
+stock, so that spares inventory stays accurate.
+Acceptance: the breakdown record has a spare-parts section that creates a stock issue against a maintenance
+cost centre.
+Fields and validation — Asset register
+Field Type Req. Validation rule
+Asset Code T ext Yes 3–20 characters, unique, immutable after creation.
+Asset T ype Select Yes Machine / Mould / Die / T ool / Utility. Controls which fields appear.
+Name & Make / ModelT ext Yes Max 100 characters each.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 53

@@ -1,0 +1,43 @@
+Business rules
+# Rule
+BR-17 An order must contain at least one line. Saving with zero lines is rejected.
+BR-18 Confirming an order creates stock commitments per line and warehouse. Cancelling releases them. Delivering
+converts commitment into an actual stock reduction.
+BR-19 Delivered quantity can never exceed ordered quantity plus a configurable tolerance (default 0%, commonly set
+to 2% for continuous processes such as extrusion and textiles).
+BR-20 Invoiced quantity can never exceed delivered quantity when invoicing is set to follow delivery.
+BR-21 Once any dispatch exists against an order, header fields that affect tax (customer, place of supply, currency)
+become read-only.
+BR-22 A confirmed invoice is immutable. Corrections are made only through a credit note or debit note, never by
+editing the invoice.
+BR-23 Invoice numbering must be strictly sequential with no gaps within a financial year, as required by GST rules.
+Cancellation keeps the number and marks the invoice cancelled.
+MODULE M07
+Purchase and Vendor Management
+Purpose
+Controls what the factory buys and from whom, so that material arrives on time, at an agreed price, from
+an approved supplier, and is checked before it is paid for.
+How it works
+A department raises a purchase indent — a request to buy — which is approved by a manager. Approved
+indents can be combined into an RFQ sent to several suppliers. Quotes received are entered and compared
+side by side in a comparative statement that highlights the lowest price, best delivery time and best
+payment terms. The buyer selects a supplier, and a purchase order is raised, approved according to value
+rules, and sent to the supplier by WhatsApp or email as a PDF .
+When material arrives, the store keeper creates a goods receipt note against the PO. The GRN records
+what  actually  arrived,  which  may  be  less  than  ordered  or  of  a  different  quality.  If  the  item  requires
+inspection, the material goes into a quarantine location and stock becomes usable only after QC accepts it.
+The supplier's bill is then matched three ways — PO, GRN and bill — and any mismatch in rate or quantity
+is flagged before payment.
+User stories
+US-M07-01 — As a Store Keeper, I want the system to suggest what to buy based on reorder levels and
+open orders, so that I do not have to check every item by hand.
+Acceptance: a "Purchase suggestion" screen lists items where free stock is at or below the reorder level,
+showing current stock, committed quantity, open PO quantity and a suggested order quantity; selected rows
+generate an indent in one click.
+US-M07-02 — As a Purchase Officer, I want to compare three supplier quotations on one screen, so that I
+can justify my choice.
+Acceptance: a matrix of items against suppliers showing rate, delivery days, payment terms and total; the
+lowest rate per item is highlighted; selecting a supplier per item is allowed (split ordering), and the reason for
+not choosing the lowest is mandatory.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 44

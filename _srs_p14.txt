@@ -1,0 +1,52 @@
+{
+  "code": "pvc_pipes",
+  "name": "PVC Pipes & Fittings",
+  "modules": {
+    "production": true, "quality": true, "maintenance": true,
+    "jobwork": false, "batch_tracking": true, "serial_tracking": false,
+    "mould_die_register": true, "shade_lot": false, "heat_number": false
+  },
+  "uom": {
+    "default_stock_uom": "MTR",
+    "allow_dual_uom": true,
+    "secondary_uom": "KG",
+    "conversion_mode": "item_specific_factor"
+  },
+  "costing": { "method": "weighted_average", "include_scrap_credit": true },
+  "item_attributes": [
+    { "key": "outer_diameter_mm", "label": "Outer Diameter (mm)", "type": "decimal", "required": true, 
+"min": 1, "max": 2000 },
+    { "key": "wall_thickness_mm", "label": "Wall Thickness (mm)", "type": "decimal", "required": true, 
+"min": 0.1, "max": 200 },
+    { "key": "pressure_class",   "label": "Pressure Class",       "type": "select", "options": 
+["PN4","PN6","PN10","PN16"], "required": true },
+    { "key": "length_per_piece_m","label": "Length per Piece (m)", "type": "decimal", "required": true, 
+"min": 0.1 },
+    { "key": "is_standard",      "label": "IS Standard",          "type": "text",   "required": false, 
+"max_length": 40 }
+  ],
+  "qc_templates": ["incoming_resin", "inprocess_extrusion", "final_pipe_dimension", 
+"hydraulic_pressure_test"],
+  "reports": ["metre_wise_production", "line_efficiency", "scrap_percentage", "extruder_downtime"],
+  "print_templates": ["pipe_bundle_label", "tax_invoice_with_metres"]
+}
+Design rule. The profile is loaded once per request and cached. Services ask questions like 
+Industry::feature('batch_tracking') or Industry::costingMethod(). They never ask 
+Industry::code() === 'pvc_pipes'. If a new industry needs behaviour that no existing flag expresses, add a
+new flag — do not add an if on the industry name.
+4.4 Dual unit of measure — the most common source of confusion
+Several of these industries buy in one unit and sell in another. A pipe factory buys resin in Kg, produces
+pipes measured in metres, and invoices the customer in metres but computes freight on Kg. The system
+handles this with three ideas:
+Concept Meaning and rule
+Stock UOM The one unit in which the stock ledger stores quantity for that item. It can never be changed
+once a transaction exists for the item. Validation must block the change.
+Transaction UOM The unit the user types on a document. Any UOM linked to the item is allowed. The system
+converts to stock UOM before writing the ledger.
+Conversion factor Stored per item, not globally, because 1 metre of 110 mm pipe is not the same weight as 1
+metre of 25 mm pipe. Factor is DECIMAL(18,6) and must be greater than zero.
+Both quantities are stored on every transaction line: qty in the transaction UOM and base_qty in the stock
+UOM. Reports can then show either. Rounding is applied only at display time, never before the ledger is
+written.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 14

@@ -1,0 +1,42 @@
+Area Reports
+Quality Inspection register · Rejection Pareto by reason · Supplier quality rating · Batch traceability (forward
+and backward) · Certificate of Analysis register · Customer complaint analysis
+Finance Day book · Cash and bank book · Trial balance · Profit and loss · Balance sheet · Outstanding
+receivable and payable ageing · GSTR-1 and GSTR-3B working · GSTR-2B reconciliation · TDS
+summary · Expense analysis by cost centre
+HR Attendance register · Late and absent summary · Overtime summary · Salary register · Statutory
+contribution statements · Leave balance
+Requirements common to every report
+# Requirement Detail
+R1 Consistent filters Date range, branch, warehouse, item category, party group and status filters
+behave identically in every report. Filter selections are remembered per user.
+R2 Drill-down everywhere Any total can be clicked to reveal the transactions behind it, and any
+transaction opens its source document.
+R3 Export Excel, CSV and PDF from every report. Exports respect field permissions — a
+user who cannot see rates does not get a rate column in the file.
+R4 Scheduling Any report can be scheduled daily, weekly or monthly and delivered by email
+or WhatsApp to a list of recipients.
+R5 Performance Reports covering up to one year of data must render within 5 seconds. Heavier
+reports run as queued jobs and notify the user when ready.
+R6 Scope-aware Every report obeys the user's data scope. A branch user's "total sales" is their
+branch's total, and the report header states the scope applied.
+Dashboard widgets
+Role Default widgets
+Management T oday's and month-to-date sales value · Production quantity versus plan · Collection versus
+target · T op 10 outstanding customers · Stock value trend · Rejection percentage trend ·
+Pending approvals
+Sales My pending orders · T oday's follow-ups · My month-to-date sales versus target · Quotations
+awaiting response · Customer credit alerts
+Purchase Items below reorder level · Pending indents to convert · Overdue purchase orders · GRNs
+awaiting inspection · Price increase alerts
+Production Work orders due today · Machine loading for the week · Yesterday's output versus plan ·
+Material shortages blocking release · Machines under breakdown
+Stores Pending receipts · Pending issue requests · Items expiring in 30 days · Negative stock
+exceptions · T oday's dispatch list
+MODULE M16
+Settings, Customization and Utilities
+Purpose
+The control room. Everything that makes one installation different from another lives here, so that an
+implementer can fit the product to a customer without a developer.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 60

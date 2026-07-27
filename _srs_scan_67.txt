@@ -1,0 +1,52 @@
+US-M17-07 — As a Super Admin, I want reprinted labels controlled, so that two boxes never carry the same
+code.
+Acceptance: a reprint reuses the same code, never generates a new one, requires a reason, prints a visible
+REPRINT mark, and is logged; a report lists units reprinted more than twice.
+US-M17-08 — As a Store Keeper, I want to replace a label that has been torn off a drum, so that the drum
+does not become anonymous stock.
+Acceptance: the replace action voids the old code, issues a new one, links old to new permanently, and a
+later scan of the old code shows "this label was replaced" with the new code rather than a blank error.
+US-M17-09 — As an Owner, I want to know instantly which packages of a suspect batch have already gone
+out and to whom, so that a recall takes minutes.
+Acceptance: from the batch, a package list shows every unit with its status, and for dispatched units the
+customer, challan, invoice, vehicle and date; the list exports to PDF and can be sent on WhatsApp to the sales
+team.
+US-M17-10 — As a Store Keeper, I want physical stock taking done by scanning, so that the annual count
+stops taking three days.
+Acceptance: a count session records each scanned unit once, then produces a variance report of expected
+against found — listing units expected in this location but not scanned, units scanned here but expected
+elsewhere, and unknown codes — which posts as a stock adjustment after approval.
+Fields and validation — Packing Unit
+Field Type Req. Validation rule
+Unit Code Auto Yes 10 characters, Crockford Base32, randomly allocated, last character a
+check digit. Unique across the installation for the life of the database.
+Never reused, never edited.
+Unit Number Auto Yes Human-readable series PU/{FY}/{SEQ:6}. Used in reports and
+conversation; the QR never carries it.
+Packing Level Select Yes 0 to 4 per Figure 10.4. Only levels enabled in the industry profile are
+offered.
+Container T ype Select Yes Box / Carton / Drum / Bag / Bundle / Roll / Crate / Pallet / Container. The
+list is per industry profile and per level.
+Parent Unit Select /
+Scan
+No Must be a higher level than this unit, must not be dispatched, and must
+not create a loop. Maximum nesting depth 5.
+Item Select Cond. Required when the unit holds items directly. Must be active and
+stockable.
+Batch / Serial Select Cond. Required for tracked items. The batch must exist, belong to that item,
+and have a positive balance at pack time.
+Quantity Decimal Yes > 0, maximum 4 decimals. T otal packed against a batch may not exceed
+that batch's produced or received quantity.
+Secondary QuantityDecimal Cond. For dual-UOM items (§4.5) — pieces against kilograms. Must fall inside
+the item's configured conversion tolerance.
+Net / Gross / T are
+Weight
+Decimal Cond. ≥ 0. Gross must equal net plus tare within a 1% tolerance. Required
+where the industry profile marks weight as captured per package.
+Package n of N Integer Yes Both > 0 and n ≤ N. Assigned by the system during a bulk pack run.
+Source Work Order /
+GRN
+Select Cond. One of the two is required. Establishes whether the package came from
+production or from purchase.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 67

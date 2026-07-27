@@ -1,0 +1,47 @@
+Field Type Req. Validation rule
+Vehicle Number T ext No Pattern ^[A-Z]{2}[0-9]{1,2}[A-Z]{0,3}[0-9]{4}$ when entered.
+Received QuantityDecimal Yes > 0. Cannot exceed pending quantity plus the line tolerance.
+Accepted / Rejected
+Quantity
+Decimal Yes Both ≥ 0; their sum must equal the received quantity exactly. Rejected
+quantity requires a reason.
+Batch Number T ext Cond. Required for batch-tracked items. Auto-generated or manual per item
+setting.
+Manufacturing /
+Expiry Date
+Date Cond. Required when shelf life is set. Expiry must be after manufacturing.
+Material already expired on receipt is blocked.
+Serial Numbers RepeatableCond. Required for serial-tracked items. The count must exactly equal the
+accepted quantity. Each serial must be globally unique.
+Landed Cost
+Allocation
+Decimal No Freight, loading and customs distributed across lines by value, quantity
+or weight. The chosen basis is recorded and the allocated cost is added
+to the item's inventory value.
+Storage Location / BinSelect Cond. Required when bin management is on.
+MODULE M08
+Inventory and Warehouse
+Purpose
+Holds the truth about what material exists, where it is, in which batch, and what it is worth. Every other
+module either reads from it or writes to it, and nothing writes to it except through the stock ledger.
+How it works
+Stock is never stored as a number that someone can type over. Instead, every movement writes a row into
+the  stock  ledger —  item,  warehouse,  batch,  quantity  in  or  out,  rate,  value,  source  document  and
+timestamp. The current balance is the sum of the ledger, kept in a cached balance table that is updated
+inside the same database transaction. This design means stock can always be explained: clicking a balance
+shows every movement that produced it.
+Four quantities are tracked separately and must never be confused:
+Quantity Meaning
+Physical What is actually lying in the warehouse right now.
+Committed Physically present but already promised to a confirmed sales order or reserved for a work order.
+On order Not yet arrived, but covered by an approved purchase order or a running work order.
+Available (free) Physical − committed. This is the number a sales executive must see before promising delivery.
+Transaction types that move stock
+Transaction Effect Notes
+Goods Receipt Note IN From a supplier, at purchase rate plus landed cost
+Purchase Return OUT At the original receipt rate
+Material Issue to ProductionOUT Against a work order, at the valuation rate
+Production Receipt IN Finished or semi-finished goods at computed cost
+By-product / Scrap Receipt IN At a configured scrap valuation rate
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 46

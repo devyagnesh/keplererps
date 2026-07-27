@@ -1,0 +1,33 @@
+# Rule Detail
+L4 Header and lines share a batch Saving a sales order with 12 lines produces one batch UUID so the
+timeline shows it as a single business event, expandable into detail.
+L5 Business events are logged tooBeyond column changes, named events are recorded: "PO approved",
+"Invoice emailed to customer", "Stock adjusted after physical count",
+"WhatsApp alert sent". These carry a readable description.
+L6 Exports and prints are logged Because an exported customer list is the most common data leak,
+every export records the module, filter used, row count and file name.
+L7 Failed permission attempts are loggedRepeated 403s from the same user raise an alert to Super Admin —
+this usually means either a wrongly configured role or someone
+probing.
+L8 Logs are written in the same
+transaction
+If the business write rolls back, the log rolls back with it. There must
+never be a log entry for a change that did not happen.
+L9 Performance guard Bulk imports write a single summarised log entry ("Imported 2,340
+items from file X") plus per-row logs written by a queued job, so the
+import itself stays fast.
+6.3 User stories — audit
+US-LOG-01 — As an Owner, I want to see who changed the rate on invoice INV-2026-00187, so that I can find
+out why the customer was billed differently from the quotation.
+Acceptance: the invoice's History tab shows "Rate changed from 112.00 to 108.00 on line 2 (Item: 110mm
+SWR Pipe) by Ramesh Patel on 14 Jul 2026 at 15:42 from IP 103.x.x.x".
+US-LOG-02 — As a Super Admin, I want to see everything one user did yesterday, so that I can investigate a
+complaint.
+Acceptance: the audit screen filtered by user and date shows a chronological list across all modules, with links
+to each affected record.
+US-LOG-03 — As an Auditor, I want to prove that stock was never edited directly, so that I can rely on the
+stock ledger.
+Acceptance: the system exposes no route that writes a stock balance directly; every balance change traces to
+a ledger entry, and every ledger entry traces to a source document with an activity log entry.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 20

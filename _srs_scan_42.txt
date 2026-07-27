@@ -1,0 +1,44 @@
+US-M06-02 — As a Sales Executive, I want to convert an accepted quotation into a sales order in one click,
+so that nothing is re-typed and nothing is mistyped.
+Acceptance: all header and line data carry across; the order links back to the quotation; the quotation status
+becomes "Converted" and can no longer be edited.
+US-M06-03 — As a Sales Manager, I want orders that exceed the customer's credit limit to need my
+approval, so that we do not increase bad debt.
+Acceptance: on save, the system computes current outstanding + open orders + this order value; if it
+exceeds the limit, the status becomes Pending Approval, alert N17 fires, and no dispatch is possible until
+approved.
+US-M06-04 — As a Sales Executive, I want to see how much of each ordered item is still pending, so that I
+can answer the customer's "where is my material" call immediately.
+Acceptance: each order line shows ordered, produced, delivered, invoiced and pending quantities, updated in
+real time.
+US-M06-05 — As an Accountant, I want GST calculated correctly for interstate and intrastate customers, so
+that returns match the books.
+Acceptance: IGST when the place of supply state differs from the company state, CGST + SGST when it
+matches, zero-rated for exports and SEZ with the correct LUT flag; the tax breakdown is shown line by line and
+summarised by rate.
+US-M06-06 — As a Sales Executive, I want to give a line discount and an overall bill discount, so that I can
+match how we actually negotiate.
+Acceptance: both percentage and absolute discount are supported at line and header level; discount above a
+configurable percentage triggers approval; the net rate after discount is always shown.
+US-M06-07 — As an Accountant, I want to raise a credit note against a returned invoice, so that the
+customer's account and stock are both corrected.
+Acceptance: the credit note references the original invoice, cannot exceed its value or quantity, returns the
+goods to stock at their original cost, and appears in the GST return with the original invoice reference.
+Fields and validation — Sales Order header
+Field Type Req. Validation rule
+Order Number Auto Yes From the numbering engine, allocated on first save with a row lock.
+Never reused, even if the order is later cancelled.
+Order Date Date Yes Cannot be in a closed financial period. Cannot be in the future beyond a
+configurable tolerance (default 0 days). Cannot be earlier than the
+linked quotation date.
+Customer Select Yes Must be an active party of type Customer. Blocked parties are rejected
+with the block reason shown.
+Customer PO NumberT ext Cond. Max 50 characters. Required when the customer's "PO mandatory" flag
+is set. Duplicate PO number for the same customer raises a warning.
+Customer PO DateDate Cond. Required with the PO number. Cannot be after the order date.
+Quotation ReferenceSelect No Must belong to the same customer and be in Sent or Accepted status.
+Billing Address Select Yes Defaults to the customer's default billing address; editable per order.
+Shipping Address Select Yes Defaults to the default shipping address. Drives the place of supply and
+therefore the tax type.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 42

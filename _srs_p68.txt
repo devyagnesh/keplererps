@@ -1,0 +1,51 @@
+Field Type Req. Validation rule
+Warehouse / LocationSelect Yes Must be inside the user's allowed warehouses. Updated by every
+transfer scan.
+Reserved for Sales
+Order
+Select No Order must be Confirmed and must contain this item with a pending
+quantity. Setting it makes the unit unavailable to other orders.
+Status Select Yes Draft / Packed / In Stock / Allocated / Loaded / Dispatched / Delivered /
+Returned / Opened / Voided. Only the transitions in the status table are
+permitted.
+QC Status Derived Yes Read from the batch's inspection result. Never set directly on the
+package.
+Manufacturing /
+Expiry Date
+Date Cond. Inherited from the batch. Expiry must be after manufacturing. Required
+where the industry profile enforces shelf life.
+Label T emplate Select Yes Must be active and must match the label stock size configured for this
+container type.
+Print Count / Last
+Printed
+Auto Yes Incremented by every print. A count above 1 forces the REPRINT mark
+onto the label.
+Voided / Replaced ByFlag / Link No Set only by the replace-label action. A voided code can never be
+scanned into an action again, only viewed.
+Remarks T ext No Maximum 250 characters. Prints on the label only if the template
+includes the block.
+Status transitions
+From Allowed next Trigger
+Draft Packed, Voided Contents confirmed and the label printed.
+Packed In Stock, Opened, VoidedStock-in scan at the receiving location.
+In Stock Allocated, Loaded, Opened,
+In Stock (transfer)
+Reservation against an order, a transfer scan, or direct loading.
+Allocated Loaded, In Stock (release)Loading scan, or release when the order is cancelled or amended.
+Loaded Dispatched, In Stock (unload)Challan confirmation, or reversal before the vehicle leaves.
+Dispatched Delivered, Returned Proof of delivery upload, or a sales return.
+Returned In Stock, Opened Only after re-inspection clears it out of quarantine.
+Opened / Voided— terminal — The code is retired. It remains scannable for enquiry forever.
+Business rules
+# Rule
+BR-41 A unit code is globally unique and permanent. It is never reused after the package is opened, consumed,
+voided or delivered.
+BR-42 The packing unit never holds an authoritative quantity of its own. Its quantity is a dimension recorded on stock
+ledger entries; a nightly job reconciles the two and reports any divergence as a defect, not as a stock
+adjustment.
+BR-43 The sum of quantities packed against a batch may never exceed the quantity produced or received for that
+batch.
+BR-44 A package cannot be dispatched while its batch is on QC hold or rejected. This block has no override at any
+permission level.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 68

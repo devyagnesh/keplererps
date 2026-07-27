@@ -1,0 +1,46 @@
+Field Type Req. Validation rule
+Quantity In / Out Decimal Yes Exactly one of the two is greater than zero; both cannot be non-zero,
+and both cannot be zero.
+Rate Decimal Yes ≥ 0, 4 decimals. For outward entries, computed by the costing method
+rather than entered.
+Value Decimal Auto quantity × rate, 2 decimals.
+Running Balance Qty /
+Value
+Decimal Auto Recomputed in sequence. Balance quantity can never go negative
+unless negative stock is explicitly allowed in Settings — the default is
+to block it.
+Source Document Polymorphic Yes T ype and ID of the document that caused the movement. No ledger row
+may exist without one.
+Business rules
+# Rule
+BR-24 Negative stock is blocked by default. When a business genuinely needs it (goods dispatched before the receipt
+is entered), it is enabled per warehouse, and every negative balance appears on a daily exception report.
+BR-25 Stock ledger rows are never updated or deleted. A correction is a reversing entry plus a new entry, both linked
+to the correction document.
+BR-26 All stock writes happen inside a database transaction with a row-level lock on the item-warehouse balance, so
+two simultaneous issues cannot both consume the last unit.
+BR-27 Back-dated entries trigger recalculation of the running balance and valuation for all later entries of that item
+and warehouse. This runs as a queued job with the item locked during the rebuild.
+BR-28 The total value of the stock ledger must always equal the inventory control account in the general ledger. A
+daily reconciliation job checks this and raises an alert on any difference.
+MODULE M09
+Production Planning and Execution
+Purpose
+Turns confirmed demand into a plan, the plan into work orders, and work orders into finished goods — while
+recording exactly what was consumed, produced, rejected and how long it took.
+How it works
+The planner starts from demand: confirmed sales orders, forecast quantities, or a make-to-stock decision. A
+production plan collects this demand for a period, explodes the BOM to work out what must be made and
+what must be bought, compares it with available stock and open purchase orders, and produces two
+outputs — a list of work orders to create and a list of shortages to purchase.
+Each work order is for one item and one quantity, links to the BOM version in force, lists the operations to
+perform, and is assigned to a machine and a target date. Releasing it checks material availability and
+reserves stock. On the shop floor the operator records production entries per shift: quantity produced
+good, quantity rejected with a defect reason, downtime with a reason, and the operator and machine
+involved. Materials are either issued manually before production or backflushed automatically when output
+is recorded, depending on the BOM setting.
+Closing a work order computes actual cost — material consumed at valuation rate, machine hours at
+machine rate, labour hours at labour rate, plus overhead — and compares it against the standard cost from
+the BOM, producing a variance the owner can act on.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 48

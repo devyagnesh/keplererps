@@ -1,0 +1,96 @@
+Code Event Default recipientsChannelsMessage content
+N06 Stock below reorder
+level
+Purchase Officer, Store
+Keeper
+P, I, W Item name, current stock, reorder level,
+suggested order qty
+N07 Batch nearing expiry
+(chemical, rubber)
+Store Keeper, QC P, I Item, batch, expiry date, remaining quantity
+and value
+N08 Work order released to
+shop floor
+Shop Floor Supervisor P, I Work order number, item, quantity, machine,
+target date
+N09 Production target
+missed for the shift
+Production Planner,
+Management
+P, W Machine, planned vs actual quantity, shift,
+reason if entered
+N10 QC rejection above
+threshold
+QC Head, Production
+Planner, Management
+W, P, I Item, batch, rejected quantity, rejection
+percentage, defect reason
+N11 Machine breakdown
+logged
+Maintenance Engineer,
+Production Planner
+P, W Machine code, breakdown time, reported by,
+affected work orders
+N12 Preventive maintenance
+due
+Maintenance Engineer P, I Machine or mould code, due date, last
+service date
+N13 Goods dispatched Customer, Sales Exec W Invoice number, vehicle number, transporter,
+LR number, e-way bill, expected arrival
+N14 Invoice generated Customer, Accountant W, E Invoice number, amount, due date, PDF
+attached
+N15 Payment received Customer, Accountant W Receipt number, amount, mode, remaining
+outstanding balance
+N16 Payment overdue
+reminder
+Customer, Sales Exec,
+Accountant
+W, E Invoice number, days overdue, amount.
+Scheduled daily at a configurable time.
+N17 Credit limit exceededSales Manager,
+Accountant
+P, I Customer, limit, current outstanding, the
+order that breached it
+N18 Employee absent / lateHR Officer, Department
+Head
+P, I Employee name, department, punch-in time
+or absence
+N19 Salary slip generatedEmployee W, E Month, net pay, PDF slip attached
+N20 Failed login attempts /
+new device login
+Super Admin, affected
+user
+P, E User, IP address, time, device
+N21 Daily business summaryManagement W, E Yesterday's sales value, production quantity,
+dispatches, collections, top pending items.
+Scheduled at 09:00.
+N23 Package scanned out for
+dispatch
+Customer contact W Package count, item, batch, vehicle number,
+expected delivery date
+N24 Dispatch scan refused
+(QC hold, wrong order,
+already dispatched)
+Dispatch Officer, QC
+Inspector, Sales owner
+P, I Package code, refusal reason, who scanned
+it, which document it belongs to
+N25 Label reprinted more
+than twice for one
+package
+Super Admin, Store
+Manager
+P, E Package code, reprint count, users and
+reasons — a duplicate-label warning
+N26 Offline scan queue
+failed to apply
+Store Manager, Super
+Admin
+P, I Device, operator, number of failed scans,
+original scan times, first failure reason
+N22 Backup completed or
+failed
+Super Admin E, I Backup file name, size, duration, or the
+failure reason
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 22

@@ -1,0 +1,45 @@
+# Rule
+BR-45 Scanning is an input method, not an authorisation. Every scanned action passes through exactly the same
+permission, record-scope and validation checks as the equivalent action typed into a form.
+BR-46 Every scan is logged — successes, refusals and duplicates alike — with user, device, timestamp, location
+where available, and the reason for any refusal.
+BR-47 A reprint always reuses the existing code. Generating a new code for an existing package is prohibited; the
+replace-label action exists for that purpose and voids the old code explicitly.
+BR-48 An action on a parent unit applies to every descendant, is previewed before commitment, and is all-or-nothing.
+A single failing child aborts the whole action and is named.
+BR-49 Nesting depth is limited to five levels and a unit can never become its own ancestor. Both are enforced in the
+database write, not only in the interface.
+BR-50 Opening or splitting a unit changes no total stock quantity. Any operation that would change quantity must be
+posted as a separate, visible adjustment with a reason.
+BR-51 A returned package enters a quarantine location and can only reach saleable stock through an inspection that
+passes.
+BR-52 T wo devices scanning the same code at the same moment must produce exactly one successful action. The
+status transition is performed under a row lock, and the loser is told which user and which document took it.
+BR-53 Queued offline scans are applied in their original scan order, not their upload order, and are never silently
+discarded.
+BR-54 The public customer scan page exposes only item, batch, dates, standard and the certificate of analysis. It is
+rate-limited, exposes no list or search endpoint, and can be switched off entirely per installation.
+BR-55 Packing units are soft-deleted like every other record. A code that once existed always resolves to something,
+even if only to "this package was cancelled on this date by this user".
+BR-56 The scan resolution endpoint must answer from a single indexed lookup on the code column. It is the most
+frequently called endpoint in the system and runs on shared hosting.
+Database tables introduced
+Table Holds
+packing_units One row per physical package: code (unique index), number, level, container type,
+parent, warehouse, status, weights, reservation, print count, void chain.
+packing_unit_items Contents of a unit — item, batch or serial, quantity, secondary quantity. A unit may have
+several lines for a mixed package.
+packing_unit_scans Every scan attempt: unit, user, device, action attempted, result, refusal reason,
+timestamp, geolocation where permitted, offline flag and original scan time.
+packing_unit_events Status changes, nesting and de-nesting, splits, opens, reprints and label replacements,
+with before and after values.
+label_templates T emplate definitions — physical size, blocks and their positions, per container type and
+per industry profile.
+stock_ledger_entriesExisting table from M08, extended with a nullable packing_unit_id column and an
+index on it.
+Interfaces with other modules
+Module Relationship
+M03 — Item Master Supplies default packing configuration per item: standard quantity per box, container type,
+label template, whether weight is captured per package.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 69

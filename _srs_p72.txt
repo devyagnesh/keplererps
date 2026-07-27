@@ -1,0 +1,9 @@
+Convention Rule
+Mandatory indexes Every foreign key; (item_id, warehouse_id, posting_at) on the stock ledger; 
+(document_no) unique per series; (party_id, date) on all transaction tables; 
+(subject_type, subject_id) on activity logs.
+Character set utf8mb4 with utf8mb4_unicode_ci collation, so Gujarati and Hindi text and emoji are
+stored safely.
+Naming of booleans Prefixed is_ or has_: is_active, has_batch.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 72

@@ -1,0 +1,54 @@
+Permission group Store
+Keeper
+Purchase
+Officer Sales ExecProduction
+Planner AccountantManagement
+Settings — — — — — view
+This is a starting point supplied as a seeder. Every customer adjusts it, and every adjustment is logged.
+17.3 Appendix C — Numbering series defaults
+Document Pattern Example
+Quotation QT/{FY}/{SEQ:5} QT/26-27/00013
+Sales Order SO/{FY}/{SEQ:5} SO/26-27/00042
+Delivery Challan DC/{FY}/{SEQ:5} DC/26-27/00097
+T ax Invoice INV/{FY}/{SEQ:5} INV/26-27/00187
+Purchase Order PO/{FY}/{SEQ:5} PO/26-27/00214
+GRN GRN/{FY}/{SEQ:5} GRN/26-27/00331
+Work Order WO/{FY}/{SEQ:5} WO/26-27/00508
+Material Issue MI/{FY}/{SEQ:5} MI/26-27/01120
+Inspection QC/{FY}/{SEQ:5} QC/26-27/00276
+Payment Voucher PV/{FY}/{SEQ:5} PV/26-27/00088
+Packing Unit PU/{FY}/{SEQ:6} PU/26-27/004128
+Pallet / handling unit PL/{FY}/{SEQ:5} PL/26-27/00219
+QR scan code Random Base32, 10
+chars
+7K4M9XQ2PB (not a series — never sequential)
+Batch (auto) {ITEM}/{YY}{MM}/{SEQ:
+3}
+PVC110/2607/014
+17.4 Appendix D — Open questions to settle before build starts
+# Question Why it matters
+Q1 Which industry is the pilot customer? The first industry profile gets built and validated first; the rest
+follow the same pattern.
+Q2 Is multi-branch needed at version 1, or one
+plant only?
+Branch scoping touches every query. Adding it later is
+expensive; leaving it in when unused costs little.
+Q3 Is e-invoicing (IRN) required, and through
+which GSP?
+The GSP contract has a lead time and defines the payload
+format.
+Q4 Which biometric attendance device is in use?Determines the punch file format for the importer.
+Q5 Will accounting stay in T ally, or move fully into
+the ERP?
+If T ally stays, an export bridge is needed instead of the full
+finance module — a significant scope difference.
+Q6 Is a native mobile app required, or is a
+responsive web app sufficient?
+A Flutter client is a separate project with its own API surface
+and release cycle.
+Q7 What is the expected number of stock
+transactions per day?
+Determines whether shared hosting is adequate or a VPS is
+required from day one.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 84

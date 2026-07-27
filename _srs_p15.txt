@@ -1,0 +1,20 @@
+4.5 Costing methods by industry
+Method Suits How it works
+Weighted Average PVC pipes, plastic, aluminium,
+steel, packaging
+Every receipt recalculates the average rate: (old
+value + new value) ÷ (old qty + new qty). Simple and
+stable when raw material prices move gradually.
+FIFO Furniture, electrical, auto partsThe oldest received cost layer is consumed first.
+Gives an accurate cost when prices move sharply,
+and needs a cost-layer table.
+Batch / Specific CostChemical, rubber, textile Each batch carries its own cost. Issue picks a specific
+batch, so the exact cost of that batch is consumed.
+Mandatory when batches differ in potency or shade.
+Standard Cost Optional add-on for auto partsA frozen planned cost is used for valuation and the
+difference from actual is posted as a variance. Used
+when the customer runs formal cost accounting.
+Important. The costing method is chosen at installation and locked once the first financial year closes.
+Changing it later requires a controlled re-valuation utility with an audit entry, available only to Super Admin.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 15

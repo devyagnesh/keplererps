@@ -1,0 +1,45 @@
+Accounts, Finance and GST
+Purpose
+Records the money side of every transaction automatically, so that the books are always in step with the
+stock and the sales — and produces the statutory outputs Indian manufacturers must file.
+How it works
+The system uses double-entry accounting with a configurable chart of accounts. Documents created in
+other modules post their accounting entries automatically through a posting rule map: a sales invoice
+debits the customer and credits sales and GST output; a GRN debits inventory and credits goods-received-
+not-invoiced; a supplier bill clears that liability and credits the supplier. Users never type these entries —
+they are generated, which is what keeps stock value and the general ledger in agreement.
+On top of the automatic postings, users record payments, receipts, journal entries, contra entries and
+expenses. Receipts are allocated against specific invoices, so the outstanding report is by invoice and by
+age,  not  just  a  customer  total.  GST  output  is  prepared  as  working  sheets  for  GSTR-1  and  GSTR-3B,
+reconciled against GSTR-2B data imported from the portal, and exported in the required format.
+Automatic posting map
+Document Debit Credit
+Goods Receipt Note Inventory (by item group) Goods Received Not Invoiced
+Supplier Bill Goods Received Not Invoiced, GST
+Input
+Supplier (Accounts Payable)
+Payment to Supplier Supplier Bank / Cash
+Material Issue to
+Production
+Work in Progress Inventory
+Production Receipt Inventory (Finished Goods) Work in Progress
+Scrap Receipt Inventory (Scrap) Work in Progress
+Delivery / Invoice Cost of Goods Sold, CustomerInventory, Sales, GST Output
+Receipt from CustomerBank / Cash Customer (Accounts Receivable)
+Credit Note Sales Return, GST Output Customer
+Stock Adjustment Inventory or Stock Variance Stock Variance or Inventory
+Payroll Salary & Wages, Employer
+contributions
+Salary Payable, Statutory Payables
+Depreciation (period end)Depreciation Expense Accumulated Depreciation
+User stories
+US-M13-01 — As an Accountant, I want invoices to post to the ledger automatically, so that I do not enter
+the same transaction twice.
+Acceptance: confirming an invoice creates a balanced journal entry visible from the invoice screen; deleting is
+impossible and reversal is only through a credit note.
+US-M13-02 — As an Accountant, I want to allocate a single receipt of ₹5,00,000 across four invoices, so that
+ageing is correct.
+Acceptance: the receipt screen lists open invoices oldest first with an auto-allocate button; the allocated total
+cannot exceed the receipt amount; any unallocated balance stays as an advance against the customer.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 56

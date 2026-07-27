@@ -1,0 +1,59 @@
+17. Appendices
+17.1 Appendix A — Document status codes
+Document Statuses in order
+Lead New → Contacted → Qualified → Quoted → Negotiation → Won / Lost
+Quotation Draft → Sent → Accepted / Rejected / Expired → Converted
+Sales Order Draft → Pending Approval → Confirmed → In Production → Ready → Partially Delivered →
+Delivered → Invoiced → Closed; plus Cancelled and On Hold
+Delivery Challan Draft → Dispatched → Delivered → Invoiced; plus Cancelled
+Invoice Draft → Confirmed → Partially Paid → Paid; plus Cancelled
+Purchase Indent Draft → Pending Approval → Approved → Partially Ordered → Ordered → Closed; plus Rejected
+and Cancelled
+Purchase Order Draft → Pending Approval → Approved → Sent → Partially Received → Received → Closed; plus
+Cancelled
+GRN Draft → Posted → Under Inspection → Accepted / Partially Accepted / Rejected
+Work Order Draft → Released → In Progress → Completed → Closed; plus Cancelled and On Hold
+Inspection Pending → In Progress → Passed / Failed / Accepted with Deviation
+Voucher Draft → Confirmed → Reconciled; plus Cancelled (by reversal only)
+17.2 Appendix B — Sample permission matrix
+Permission group Store
+Keeper
+Purchase
+Officer Sales ExecProduction
+Planner AccountantManagement
+Item master view view, create view view view view
+Party master view full
+(supplier)
+full
+(customer,
+own)
+view view, update view
+Sales order view — create,
+update, view
+view (no
+rates)
+view view, approve
+Purchase order view create,
+update,
+print
+— view view view, approve
+GRN create,
+update,
+print
+view — view view view
+Material issue create,
+update
+— — view — view
+Work order view — view full — view
+Production entry — — — view, update — view
+Invoice — — view — full view
+Payments / receipts — — — — full view, approve
+Reports stock only purchase,
+stock
+sales (own) production,
+stock
+finance, sales,
+purchase
+all
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 83

@@ -1,0 +1,40 @@
+# Rule
+BR-38 T ax is computed line by line and rounded at line level, then summed. Never compute tax on the invoice total —
+the results differ and returns are matched line by line.
+BR-39 Bank reconciliation marks entries as reconciled with a bank date; reconciled entries cannot be modified.
+BR-40 Year-end closing posts profit or loss to the capital or reserves account, carries balances forward and locks the
+year. Reopening a closed year requires Super Admin and is prominently logged.
+MODULE M14
+HR, Attendance and Payroll
+Purpose
+Manages the workforce — who is employed, when they worked, what they are owed — with the shift,
+overtime and piece-rate patterns that factories actually use.
+How it works
+Employees are recorded with their department, designation, shift, salary structure and statutory details.
+Attendance arrives three ways: from a biometric device file import, from a mobile punch with location, or
+by manual entry for staff without devices. The system converts raw punches into attendance days using
+shift rules — grace period, half-day threshold, late marks, overtime beyond shift hours, and weekly offs and
+holidays from a calendar.
+Payroll processing takes attendance plus the salary structure and computes gross pay, statutory deductions
+(PF, ESI, professional tax, TDS), advances and loan instalments, and net pay. Piece-rate and production-
+linked incentives are supported by reading production entries for the operator. Salary slips are generated
+as PDFs and can be delivered on WhatsApp.
+User stories
+US-M14-01 — As an HR Officer, I want to import the biometric punch file every morning, so that attendance
+is captured without typing.
+Acceptance: the import accepts the device's CSV or Excel format, matches employees by device code, reports
+unmatched punches, and never creates duplicate records for the same employee, date and punch time.
+US-M14-02 — As an HR Officer, I want overtime calculated automatically from shift rules, so that wage
+disputes are avoided.
+Acceptance: hours beyond shift duration, above a configurable minimum threshold, are marked as overtime
+and multiplied by the configured rate; the calculation is visible per employee per day.
+US-M14-03 — As a Shop Floor Supervisor, I want to pay some operators on a piece-rate basis, so that pay
+matches output.
+Acceptance: a salary structure component of type "piece rate" reads the good quantity produced by that
+operator from production entries for the period, multiplied by the item's piece rate.
+US-M14-04 — As an Employee, I want my salary slip on WhatsApp, so that I do not have to ask the office for
+a copy.
+Acceptance: alert N19 sends a password-protected PDF slip after payroll is approved; the password is the
+employee's date of birth in a configured format.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 58

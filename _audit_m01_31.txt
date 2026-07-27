@@ -1,0 +1,43 @@
+Code Module Phase Depends on
+M15 Reports, Dashboards and
+Analytics
+2–4 all
+M16 Settings, Customization and
+Utilities
+1 M01, M02
+MODULE M01
+Company Setup and Master Data
+Purpose
+Holds the information that every other module reads: the company itself, its branches and warehouses, and
+the shared lists — customers, suppliers, tax rates, units, categories, transporters. If this data is wrong,
+every document produced afterwards is wrong, so this module is built first and validated hardest.
+How it works
+After installation, a setup wizard walks the implementer through six steps: company details and GST
+registration; financial year and numbering; branches and warehouses; tax and UOM masters; industry
+profile selection; and the first admin users. Each step can be revisited later from Settings. Masters can also
+be bulk-imported from Excel using a downloadable template, with a validation preview that shows errors
+row by row before anything is written.
+User stories
+US-M01-01 — As a Super Admin, I want to enter company details, GSTIN, PAN and upload a logo, so that
+every printed document carries correct legal information.
+Acceptance: the logo appears on all print templates; changing the GSTIN after invoices exist requires a
+confirmation and is logged.
+US-M01-02 — As a Super Admin, I want to define multiple warehouses and storage bins, so that stock can be
+located precisely on the shop floor.
+Acceptance: warehouses support a parent-child hierarchy (Plant → Store → Rack → Bin) up to four levels; a
+warehouse with stock cannot be deleted.
+US-M01-03 — As an Accountant, I want to add a customer with GSTIN, and have the state code, place of
+supply and default tax type filled in automatically, so that GST is applied correctly without me remembering
+the rules.
+Acceptance: entering a valid 15-character GSTIN populates the state from the first two digits and sets the tax
+type to IGST when the customer state differs from the company state, CGST+SGST when it matches.
+US-M01-04 — As a Purchase Officer, I want to record multiple contact persons and addresses per supplier,
+so that the PO goes to the right person and material goes to the right gate.
+Acceptance: unlimited addresses tagged as billing, shipping or factory; exactly one must be marked default
+per type.
+US-M01-05 — As a Super Admin, I want to import 2,000 customers from an Excel file, so that go-live does
+not take weeks of typing.
+Acceptance: a downloadable template with the exact columns; a dry-run preview listing every invalid row with
+the reason; the import is queued and reports "1,942 imported, 58 skipped" with a downloadable error file.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 31

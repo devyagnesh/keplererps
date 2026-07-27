@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Category>
+ */
+class CategoryFactory extends Factory
+{
+    /**
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'parent_id' => null,
+            'code' => strtoupper(fake()->unique()->bothify('CAT###')),
+            'name' => fake()->words(2, true),
+            'category_type' => 'item',
+            'is_active' => true,
+            'has_transactions' => false,
+        ];
+    }
+}

@@ -1,0 +1,46 @@
+US-M13-03 — As an Owner, I want an ageing report showing who owes us money and for how long, so that I
+can chase collections.
+Acceptance: buckets of 0–30, 31–60, 61–90 and over 90 days, by customer and by invoice, with a total and a
+drill-down, exportable and sendable on WhatsApp to the sales team.
+US-M13-04 — As an Accountant, I want a GSTR-1 working sheet from the system, so that filing takes an hour
+instead of three days.
+Acceptance: B2B, B2C large, B2C small, credit and debit notes, exports and HSN summary sections are
+produced from confirmed invoices; the totals reconcile to the sales ledger; a JSON or Excel export in the
+portal's format is available.
+US-M13-05 — As an Owner, I want a profit and loss statement for any date range, so that I can see how the
+business is doing without waiting for the year end.
+Acceptance: P&L, balance sheet and trial balance for any period, with comparison to the previous period, and
+drill-down from any figure to the underlying vouchers.
+US-M13-06 — As an Accountant, I want to lock a period once returns are filed, so that nobody changes a
+past month by accident.
+Acceptance: period locking by date with a per-module override permission; any attempt to post into a locked
+period is rejected with a clear message naming the lock date.
+Fields and validation — Payment / Receipt voucher
+Field Type Req. Validation rule
+Voucher Number /
+Date
+Auto /
+Date
+Yes Date not in a closed period and not in the future.
+Voucher T ype Select Yes Receipt / Payment / Contra / Journal.
+Party Select Cond. Required for receipt and payment; not applicable to contra.
+Amount Decimal Yes > 0, maximum 12 digits with 2 decimals.
+Mode Select Yes Cash / Cheque / NEFT / RTGS / UPI / Card. Cash above the statutory limit
+raises a warning.
+Bank Account Select Cond. Required for all non-cash modes.
+Instrument Number &
+Date
+T ext / DateCond. Required for cheque. Cheque date cannot be more than 3 months old.
+Allocation lines RepeatableCond. Invoice reference plus allocated amount. Sum of allocations ≤ voucher
+amount. Allocation per invoice ≤ that invoice's outstanding.
+TDS Deducted Decimal No ≥ 0. When entered, section and rate become required and a TDS
+payable entry is posted.
+Narration T ext Yes 5–250 characters. Prints on the voucher and the ledger.
+Business rules
+# Rule
+BR-35 Every journal entry must balance to zero to the paisa before it is written. An unbalanced entry is impossible,
+not merely warned about.
+BR-36 Confirmed vouchers are never edited or deleted. Corrections are reversal entries that reference the original.
+BR-37 Invoice numbering must be gapless and sequential per financial year and per series, as required by GST rules.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 57

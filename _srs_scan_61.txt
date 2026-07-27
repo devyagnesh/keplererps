@@ -1,0 +1,42 @@
+Settings groups
+Group Contents
+Company Company details, branches, financial year, currency, decimal places, logo, letterhead mode
+Industry Active industry profile, feature flags, item attribute definitions, default UOM set, costing
+method
+Numbering Series per document type per year and per branch, prefix, padding, reset behaviour, preview
+of the next number
+Custom fields Field builder per screen with type, validation, placement, print and export flags
+Approvals Rules per document type with conditions, approver roles, sequence and escalation
+Print templates T emplate editor with live preview, paper size, margins, letterhead handling, copies
+Notifications Alert catalogue with per-alert channel and recipient configuration, quiet hours, digest
+settings, delivery log
+Integrations WhatsApp Cloud API, Firebase, SMTP, GST portal or GSP hooks, biometric device format,
+marketplace lead import
+Users & roles Users, roles, permission matrix, data scopes, field permissions, session and password policy
+Masters UOM, categories, HSN, tax rates, states, terms library, defect reasons, downtime reasons,
+departments, shifts, holidays
+Localisation Language, date format, number format (Indian or international grouping), time zone, label
+overrides
+System Backup schedule and manual backup, restore, update check, licence details, activity log
+viewer, queue and job monitor, health check, cache clear
+Utilities
+Utility Behaviour
+Data import Downloadable template per master, column mapping that is remembered, dry-run
+validation with a row-by-row error report, queued execution, and a summary with a
+downloadable error file.
+Backup and restore Database dump plus the uploads folder, compressed and optionally encrypted. Manual
+button and scheduled cron. Retention count configurable. Restore requires typing the
+installation name to confirm.
+Update manager Checks for a new version, shows the changelog, takes an automatic backup, puts the site
+into maintenance mode, applies files and migrations, clears caches, and rolls back on
+failure.
+Health check Verifies PHP version and extensions, folder permissions, database connectivity, queue
+worker heartbeat, cron last-run time, disk space, and integration credentials. Shown as a
+traffic-light panel to Super Admin.
+Recycle bin Lists soft-deleted records for 90 days with the ability to restore, subject to permission and
+to referential checks.
+Bulk operations Bulk price update, bulk item status change, bulk reassignment of a sales executive's
+customers — each producing a single summarised activity log entry plus per-record detail.
+MODULE M17
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 61

@@ -1,0 +1,15 @@
+8.3 User stories — printing
+US-PDF-01 — As an Accountant, I want to print a tax invoice that already matches our old printed format, so
+that customers do not notice a disruptive change.
+Acceptance: the template editor allows adjusting the header block, column set, column widths and footer
+terms without a developer; the result matches the sample provided during implementation.
+US-PDF-02 — As a Store Keeper, I want to print a 100×50 mm batch label with a QR code from the GRN
+screen, so that every incoming lot is identified on the rack.
+Acceptance: label size is configurable; the QR contains item code, batch number and GRN number; printing
+works on a standard thermal label printer through the browser.
+US-PDF-03 — As a Sales Executive, I want to send a quotation on WhatsApp directly from the quotation
+screen, so that I do not download, switch apps and re-upload.
+Acceptance: one button generates the PDF, stores it, creates a signed link and queues the WhatsApp
+template message; the screen shows the delivery status once the webhook returns.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 28

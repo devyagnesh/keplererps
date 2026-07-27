@@ -1,0 +1,43 @@
+Action suffix Example Meaning
+.view_rate sales_order.view_rate See price and value columns. Withholding it hides
+money from shop-floor roles.
+.reopen work_order.reopen Return a closed document to an open status. Marked as
+a dangerous permission.
+5.3 User stories — access control
+US-RBAC-01 — As a Super Admin, I want to create a role and tick permissions on a grouped checklist, so
+that I can set up a new job function in a few minutes without a developer.
+Acceptance: permissions appear grouped by module with a "select all in module" checkbox; saving writes an
+activity log entry listing added and removed permissions.
+US-RBAC-02 — As a Super Admin, I want to copy an existing role, so that I can make a slight variation
+without ticking eighty boxes again.
+Acceptance: the copy is created with " (Copy)" appended to the name and identical permissions; the name
+must then be edited to something unique.
+US-RBAC-03 — As a Sales Manager, I want my executives to see only their own customers' orders, so that
+team members do not poach or leak each other's accounts.
+Acceptance: with scope = "own", every list query is automatically filtered by assigned_user_id; direct URL
+access to another user's record returns 403 and is logged.
+US-RBAC-04 — As an Owner, I want purchase orders above ₹2,00,000 to need my approval, so that large
+spending is controlled.
+Acceptance: an approval rule with condition grand_total > 200000 routes the PO to the Management role;
+the PO stays in "Pending Approval" and cannot generate a GRN until approved.
+US-RBAC-05 — As a Production Planner, I want to open a sales order to plan production, but I should not
+see the selling price.
+Acceptance: a field permission on rate, amount and grand_total for the Planner role sets 
+can_view = false; those columns are removed from the screen, from the exported file and from the API
+response — not merely hidden by CSS.
+US-RBAC-06 — As a Super Admin, I want to deactivate a user who has left the company without deleting
+them, so that their old documents keep showing their name.
+Acceptance:is_active = false blocks login immediately and revokes all API tokens and FCM devices, while
+historical records remain intact.
+US-RBAC-07 — As a Super Admin, I want to force two-factor authentication for finance roles, so that
+accounting data is protected.
+Acceptance: a per-role flag require_2fa; on next login the user must set up a TOTP app before reaching any
+other screen.
+5.4 Authentication requirements
+Requirement Rule
+Login identifier Email or mobile number or username, configurable in Settings. Case-insensitive,
+trimmed.
+Password policy Minimum 8 characters, at least one letter and one digit. Configurable to require symbols
+and 12 characters. Checked against a list of the 1000 most common passwords.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 17

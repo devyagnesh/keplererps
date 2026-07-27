@@ -1,0 +1,46 @@
+7.5.3 Outgoing payload
+POST https://fcm.googleapis.com/v1/projects/{PROJECT_ID}/messages:send
+Authorization: Bearer {OAUTH2_ACCESS_TOKEN — obtained from the service account, cached ~55 min}
+{
+  "message": {
+    "token": "d7Kj...device_token",
+    "notification": {
+      "title": "Purchase Order needs your approval",
+      "body":  "PO-2026-00214 · Mahalaxmi Polymers · Rs 3,45,600"
+    },
+    "data": {
+      "type": "purchase_order_approval",
+      "module": "purchase",
+      "record_id": "214",
+      "deep_link": "/purchase-orders/214",
+      "priority": "high"
+    },
+    "android": { "priority": "HIGH",
+                 "notification": { "channel_id": "erp_approvals", "sound": "default" } },
+    "apns":    { "payload": { "aps": { "sound": "default", "badge": 1 } } },
+    "webpush": { "fcm_options": { "link": "https://erp.customer.com/purchase-orders/214" } }
+  }
+}
+Rules: the  data block always carries  type,  module,  record_id and  deep_link so tapping the notification
+opens the exact record. Title must stay under 65 characters and body under 240, because both are
+truncated on the lock screen. Batch sends use multicast in chunks of 500 tokens.
+7.6 Notification preference rules
+# Rule Detail
+NR1 Three levels of control System default → role default → individual user preference. The most
+specific one wins.
+NR2 Users cannot mute mandatory
+alerts
+Alerts flagged is_mandatory (approvals addressed to them, security
+alerts) are always delivered in-app even if other channels are muted.
+NR3 De-duplication The same event to the same recipient on the same channel is not sent
+twice within a configurable window (default 30 minutes), identified by an
+event fingerprint hash.
+NR4 Digest option High-frequency alerts (low stock, QC rejections) can be set to "digest" so
+one summary message is sent per hour or per day instead of one per
+event.
+NR5 Customer consent Each customer and supplier contact has a whatsapp_opt_in flag with the
+date it was recorded. No WhatsApp message goes to a contact without it.
+NR6 Everything is visible Settings → Notification Log lists every attempt with recipient, channel,
+status, and the exact rendered message, filterable and exportable.
+Manufacturing ERP — Software Requirements Specification v1.0
+Confidential — Keplersoft Page 26
