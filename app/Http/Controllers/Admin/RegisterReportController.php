@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PartyStatus;
 use App\Enums\PartyType;
 use App\Enums\PurchaseBillStatus;
 use App\Enums\SalesInvoiceStatus;
@@ -12,6 +13,7 @@ use App\Models\Warehouse;
 use App\Models\WorkCentre;
 use App\Services\CsvExportService;
 use App\Services\RegisterReportService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -341,12 +343,12 @@ class RegisterReportController extends Controller
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Collection<int, Party>
+     * @return Collection<int, Party>
      */
     protected function parties(PartyType $type)
     {
         return Party::query()
-            ->where('is_active', true)
+            ->where('status', PartyStatus::Active)
             ->whereIn('party_type', [$type->value, PartyType::Both->value])
             ->orderBy('party_code')
             ->get(['id', 'party_code', 'party_name']);

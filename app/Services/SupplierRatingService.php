@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\InspectionStatus;
+use App\Enums\PartyStatus;
 use App\Enums\PartyType;
 use App\Enums\PurchaseOrderStatus;
 use App\Models\GoodsReceipt;
@@ -11,7 +12,7 @@ use App\Models\PurchaseOrder;
 use App\Models\QcInspection;
 use App\Models\SupplierRating;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 /**
  * Supplier performance rating from OTIF and incoming QC (US-M07-05).
@@ -30,7 +31,7 @@ class SupplierRatingService
 
         $suppliers = Party::query()
             ->whereIn('party_type', [PartyType::Supplier->value, PartyType::Both->value])
-            ->where('is_active', true)
+            ->where('status', PartyStatus::Active)
             ->get(['id']);
 
         $ratings = [];
@@ -106,7 +107,7 @@ class SupplierRatingService
     }
 
     /**
-     * @return \Illuminate\Support\Collection<int, SupplierRating>
+     * @return Collection<int, SupplierRating>
      */
     public function latest()
     {

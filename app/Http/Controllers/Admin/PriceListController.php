@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PartyStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Models\Party;
@@ -130,7 +131,7 @@ class PriceListController extends Controller
     {
         return [
             'items' => Item::query()->where('is_active', true)->where('is_sellable', true)->orderBy('item_code')->limit(500)->get(['id', 'item_code', 'item_name', 'selling_price']),
-            'parties' => Party::query()->where('is_active', true)->orderBy('party_code')->limit(500)->get(['id', 'party_code', 'party_name', 'party_type']),
+            'parties' => Party::query()->where('status', PartyStatus::Active)->orderBy('party_code')->limit(500)->get(['id', 'party_code', 'party_name', 'party_type']),
         ];
     }
 

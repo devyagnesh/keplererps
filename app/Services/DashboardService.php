@@ -101,7 +101,61 @@ class DashboardService
             ];
         }
 
-        return $this->filterByRole($widgets);
+        return $this->withDefaults($this->filterByRole($widgets));
+    }
+
+    /**
+     * Ensure every widget group the dashboard view reads always exists.
+     *
+     * @param  array<string, array<string, mixed>>  $widgets
+     * @return array<string, array<string, mixed>>
+     */
+    protected function withDefaults(array $widgets): array
+    {
+        $defaults = [
+            'sales' => [
+                'open_orders' => 0,
+                'open_order_value' => 0.0,
+                'invoiced_this_month' => 0.0,
+                'overdue_deliveries' => 0,
+            ],
+            'purchase' => [
+                'open_orders' => 0,
+                'open_order_value' => 0.0,
+                'bills_awaiting_approval' => 0,
+                'bills_awaiting_value' => 0.0,
+            ],
+            'inventory' => [
+                'quarantine_qty' => 0.0,
+                'rejection_qty' => 0.0,
+                'below_min_stock' => 0,
+                'pending_inspections' => 0,
+            ],
+            'production' => [
+                'live_orders' => 0,
+                'due_orders' => 0,
+                'planned_qty' => 0.0,
+                'produced_qty' => 0.0,
+            ],
+            'maintenance' => [
+                'under_breakdown' => 0,
+                'open_orders' => 0,
+                'pm_due' => 0,
+                'downtime_minutes' => 0,
+            ],
+            'finance' => [
+                'receivable_total' => 0.0,
+                'receivable_overdue' => 0.0,
+                'payable_total' => 0.0,
+                'payable_overdue' => 0.0,
+            ],
+        ];
+
+        foreach ($defaults as $group => $values) {
+            $widgets[$group] = array_merge($values, $widgets[$group] ?? []);
+        }
+
+        return $widgets;
     }
 
     /**

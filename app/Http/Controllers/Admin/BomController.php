@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\BomIssueMethod;
+use App\Enums\PartyStatus;
+use App\Enums\PartyType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BomRequest;
 use App\Models\Bom;
@@ -171,8 +173,8 @@ class BomController extends Controller
                 ->orderBy('code')
                 ->get(['id', 'code', 'name', 'machine_rate_per_hour', 'labour_rate_per_hour']),
             'vendors' => Party::query()
-                ->where('is_active', true)
-                ->whereIn('party_type', [\App\Enums\PartyType::Supplier, \App\Enums\PartyType::Both])
+                ->where('status', PartyStatus::Active)
+                ->whereIn('party_type', [PartyType::Supplier, PartyType::Both])
                 ->orderBy('party_name')
                 ->get(['id', 'party_code', 'party_name']),
             'issueMethods' => BomIssueMethod::cases(),
