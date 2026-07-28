@@ -1,7 +1,12 @@
 @extends('admin.layouts.app')
 @section('title', 'Dashboard Widgets')
 @section('content')
-<div class="my-4"><h1 class="page-title fw-semibold fs-18 mb-0">Dashboard Widgets by Role</h1></div>
+<div class="my-4 page-header-breadcrumb">
+    <div>
+        <h1 class="page-title fw-semibold fs-18 mb-0">Dashboard Widgets by Role</h1>
+        <x-admin.module-intro module="dashboard-widgets" />
+    </div>
+</div>
 <div class="card custom-card"><div class="card-body">
 @foreach ($roles as $role)
 @php $selected = collect($packs->get($role->name)?->widget_keys ?? []); @endphp

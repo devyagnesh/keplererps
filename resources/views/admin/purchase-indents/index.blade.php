@@ -2,7 +2,7 @@
 @section('title', 'Purchase Indents')
 @section('content')
 <div class="my-4 page-header-breadcrumb d-flex justify-content-between align-items-center">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Purchase Indents</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Purchase Indents</h1><x-admin.module-intro /></div>
 </div>
 <div class="card custom-card mb-3"><div class="card-body">
 <form data-ajax="1" data-reload="1" method="post" action="{{ route('admin.purchase-indents.store') }}">

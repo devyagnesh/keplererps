@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Holidays & Leave')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Holidays & Leave ({{ $year }})</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Holidays & Leave ({{ $year }})</h1><x-admin.module-intro /></div></div>
 <div class="row">
 <div class="col-lg-6">
 <div class="card custom-card mb-3"><div class="card-body">

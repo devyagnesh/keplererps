@@ -2,7 +2,9 @@
 @section('title', 'Salary Runs')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Salary Runs</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Salary Runs</h1>
+        <x-admin.module-intro />
+    </div>
     @can('salary_run.create')
     <a href="{{ route('admin.salary-runs.create') }}" class="btn btn-primary btn-sm">New Salary Run</a>
     @endcan

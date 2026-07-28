@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Customers & Suppliers</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Customers & Suppliers</h1>
+        <x-admin.module-intro />
+    </div>
     <a href="{{ route('admin.parties.create') }}" class="btn btn-primary btn-sm">Add Party</a>
     <a href="{{ route('admin.parties.import.index') }}" class="btn btn-light btn-sm ms-1">Import CSV</a>
 </div>

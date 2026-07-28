@@ -2,7 +2,9 @@
 @section('title', 'Trial Balance')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Trial Balance</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Trial Balance</h1>
+        <x-admin.module-intro />
+    </div>
 </div>
 <div class="card custom-card"><div class="card-body">
 <form method="GET" action="{{ route('admin.finance-reports.trial-balance') }}" class="row g-2 mb-3">

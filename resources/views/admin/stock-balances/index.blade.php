@@ -2,7 +2,9 @@
 @section('title', 'Stock Balances')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Stock Balances & Valuation</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Stock Balances & Valuation</h1>
+        <x-admin.module-intro />
+    </div>
 </div>
 <div class="row mb-3">
     <div class="col-md-4"><div class="card custom-card"><div class="card-body"><div class="text-muted">Total Qty</div><div class="fs-20 fw-semibold" id="summaryQty">{{ number_format($summary['total_qty'], 4) }}</div></div></div></div>

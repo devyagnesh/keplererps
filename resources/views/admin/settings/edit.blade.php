@@ -1,7 +1,12 @@
 @extends('admin.layouts.app')
 @section('title', 'System Settings')
 @section('content')
-<div class="my-4"><h1 class="page-title fw-semibold fs-18 mb-0">System Settings</h1></div>
+<div class="my-4 page-header-breadcrumb">
+    <div>
+        <h1 class="page-title fw-semibold fs-18 mb-0">System Settings</h1>
+        <x-admin.module-intro module="settings" />
+    </div>
+</div>
 <div class="card custom-card"><div class="card-body">
 <form id="settingsForm" action="{{ route('admin.settings.update') }}" method="POST" novalidate>
 @csrf

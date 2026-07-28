@@ -2,7 +2,9 @@
 @section('title', 'QC Templates')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">QC Templates</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">QC Templates</h1>
+        <x-admin.module-intro />
+    </div>
     @can('qc_template.create')
     <a href="{{ route('admin.qc-templates.create') }}" class="btn btn-primary btn-sm">Add Template</a>
     @endcan

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UomSeeder::class,
             HsnCodeSeeder::class,
             AdminUserSeeder::class,
+            PortalCustomerSeeder::class,
             CompanySeeder::class,
             SystemSettingSeeder::class,
             DocumentNumberSeriesSeeder::class,

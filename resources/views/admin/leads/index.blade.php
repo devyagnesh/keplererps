@@ -2,7 +2,9 @@
 @section('title', 'Leads')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Leads</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Leads</h1>
+        <x-admin.module-intro />
+    </div>
     @can('lead.create')
     <a href="{{ route('admin.leads.create') }}" class="btn btn-primary btn-sm">Add Lead</a>
     @endcan

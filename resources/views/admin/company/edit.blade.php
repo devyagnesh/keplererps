@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Company Setup</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Company Setup</h1>
+        <x-admin.module-intro />
+    </div>
     <ol class="breadcrumb mb-0">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
         <li class="breadcrumb-item active" aria-current="page">Company</li>

@@ -19,9 +19,9 @@ const Notify = (function () {
     }
 
     return {
-        success: function (msg) { _show(msg, '#28a745'); },
-        error: function (msg) { _show(msg, '#dc3545'); },
-        warning: function (msg) { _show(msg, '#ffc107'); },
-        info: function (msg) { _show(msg, '#17a2b8'); }
+        success: function (msg) { _show(msg, '#059669'); },
+        error: function (msg) { _show(msg, '#dc2626'); },
+        warning: function (msg) { _show(msg, '#d97706'); },
+        info: function (msg) { _show(msg, '#2563eb'); }
     };
 })();

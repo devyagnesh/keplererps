@@ -2,7 +2,7 @@
 @section('title', 'Indent '.$indent->document_no)
 @section('content')
 <div class="my-4 page-header-breadcrumb d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Indent {{ $indent->document_no }}</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Indent {{ $indent->document_no }}</h1><x-admin.module-intro /></div>
     <div class="d-flex gap-2">
         @if(in_array($indent->status->value, ['approved', 'partially_ordered'], true))
             <form data-ajax="1" data-reload="0" method="post" action="{{ route('admin.purchase-indents.rfq', $indent) }}" class="d-inline">

@@ -4,6 +4,7 @@
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <div>
         <h1 class="page-title fw-semibold fs-18 mb-0">WO {{ $workOrder->document_no }}</h1>
+        <x-admin.module-intro />
         <p class="text-muted mb-0">
             {{ $workOrder->status->label() }}
             · Planned {{ number_format((float) $workOrder->planned_quantity, 4) }}

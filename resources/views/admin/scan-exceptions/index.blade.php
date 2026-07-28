@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Scan Exceptions')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Open Scan Exceptions</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Open Scan Exceptions</h1><x-admin.module-intro /></div></div>
 <div class="card custom-card"><div class="card-body table-responsive">
 <table class="table table-bordered">
 <thead><tr><th>Code</th><th>Context</th><th>Reason</th><th>Device</th><th>When</th><th></th></tr></thead>

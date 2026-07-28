@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Industry Profiles')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Industry Profiles</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Industry Profiles</h1><x-admin.module-intro /></div></div>
 @if($active)
 <p class="text-muted">Active: <strong>{{ $active->name }}</strong> ({{ $active->code }})</p>
 @endif

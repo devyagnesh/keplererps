@@ -4,6 +4,7 @@
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <div>
         <h1 class="page-title fw-semibold fs-18 mb-0">Challan {{ $deliveryChallan->document_no }}</h1>
+        <x-admin.module-intro />
         <p class="text-muted mb-0">{{ $deliveryChallan->status->label() }} · SO {{ $deliveryChallan->salesOrder?->document_no }} · {{ $deliveryChallan->customer?->party_name }}</p>
     </div>
     <div class="d-flex flex-wrap gap-2">

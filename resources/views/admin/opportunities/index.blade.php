@@ -2,7 +2,9 @@
 @section('title', 'Opportunities')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Opportunities</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Opportunities</h1>
+        <x-admin.module-intro />
+    </div>
     <div class="d-flex gap-2">
         <a href="{{ route('admin.opportunities.pipeline') }}" class="btn btn-primary-light btn-sm">Pipeline Board</a>
         @can('opportunity.create')

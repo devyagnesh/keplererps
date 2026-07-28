@@ -3,7 +3,9 @@
 @section('content')
 @php $wo = $sheet['work_order']; @endphp
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Costing — {{ $wo->document_no }}</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Costing — {{ $wo->document_no }}</h1>
+        <x-admin.module-intro />
+    </div>
     <a href="{{ route('admin.shop-floor.operator', ['work_centre_id' => $wo->work_centre_id]) }}" class="btn btn-light btn-sm">Back to Board</a>
 </div>
 <div class="row g-3">

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'New Stock Take')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">New Stock Take</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">New Stock Take</h1><x-admin.module-intro /></div></div>
 <div class="card custom-card"><div class="card-body">
 <form id="stockTakeCreateForm" data-ajax="1" method="post" action="{{ route('admin.stock-takes.store') }}">
     @csrf

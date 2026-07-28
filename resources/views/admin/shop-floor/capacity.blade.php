@@ -2,7 +2,9 @@
 @section('title', 'Capacity Chart')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Capacity Chart ({{ $days }} days)</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Capacity Chart ({{ $days }} days)</h1>
+        <x-admin.module-intro />
+    </div>
     <a href="{{ route('admin.shop-floor.operator') }}" class="btn btn-light btn-sm">Operator Board</a>
 </div>
 <form method="GET" class="row g-2 mb-3">

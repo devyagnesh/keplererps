@@ -2,7 +2,9 @@
 @section('title', isset($priceList) ? 'Edit Price List' : 'New Price List')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">{{ isset($priceList) ? 'Edit Price List' : 'New Price List' }}</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">{{ isset($priceList) ? 'Edit Price List' : 'New Price List' }}</h1>
+        <x-admin.module-intro />
+    </div>
     <a href="{{ route('admin.price-lists.index') }}" class="btn btn-outline-secondary btn-sm">Back</a>
 </div>
 <div class="card custom-card"><div class="card-body">

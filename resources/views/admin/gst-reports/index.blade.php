@@ -2,7 +2,9 @@
 @section('title', 'GST Worksheets')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">GST Worksheets</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">GST Worksheets</h1>
+        <x-admin.module-intro />
+    </div>
     <div class="d-flex flex-wrap gap-1">
         <a class="btn btn-primary-light btn-sm" href="{{ route('admin.gst-reports.export', ['worksheet' => 'outward', 'from_date' => $fromDate, 'to_date' => $toDate]) }}">Export GSTR-1</a>
         <a class="btn btn-primary-light btn-sm" href="{{ route('admin.gst-reports.export', ['worksheet' => 'inward', 'from_date' => $fromDate, 'to_date' => $toDate]) }}">Export Inward</a>

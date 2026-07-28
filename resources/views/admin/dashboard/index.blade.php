@@ -7,6 +7,7 @@
     <div>
         <p class="fw-semibold fs-18 mb-0">{{ $company?->trade_name ?? $company?->legal_name ?? 'Kepler ERP' }}</p>
         <span class="fs-semibold text-muted">Welcome, {{ auth()->user()->name }} · {{ now()->format('d M Y') }}</span>
+        <x-admin.module-intro module="dashboard" />
     </div>
     @can('report.view')
     <a href="{{ route('admin.reports.show', 'sales') }}" class="btn btn-primary-light btn-sm">Open Registers</a>

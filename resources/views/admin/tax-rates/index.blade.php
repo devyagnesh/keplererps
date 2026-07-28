@@ -1,8 +1,10 @@
-﻿@extends('admin.layouts.app')
+@extends('admin.layouts.app')
 @section('title', 'Tax Rates')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Tax Rates</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Tax Rates</h1>
+        <x-admin.module-intro />
+    </div>
     <a href="{{ route('admin.tax-rates.create') }}" class="btn btn-primary btn-sm">Add</a>
 </div>
 <div class="card custom-card"><div class="card-body"><div class="table-responsive">

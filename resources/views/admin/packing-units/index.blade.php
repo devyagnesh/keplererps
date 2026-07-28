@@ -2,7 +2,9 @@
 @section('title', 'Packing Units')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Packing Units</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Packing Units</h1>
+        <x-admin.module-intro />
+    </div>
     @can('packing_unit.create')
     <a href="{{ route('admin.packing-units.create') }}" class="btn btn-primary btn-sm">Add Packing Unit</a>
     @endcan

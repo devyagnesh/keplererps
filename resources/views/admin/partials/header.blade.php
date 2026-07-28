@@ -19,9 +19,10 @@
         </div>
         <div class="header-content-right">
             <div class="header-element">
-                <form method="post" action="{{ route('admin.locale.update') }}" class="d-inline">
+                <form method="post" action="{{ route('admin.locale.update') }}" class="header-link d-flex align-items-center mb-0">
                     @csrf
-                    <select name="locale" class="form-select form-select-sm" onchange="this.form.submit()" title="Language">
+                    <label class="visually-hidden" for="headerLocale">Language</label>
+                    <select id="headerLocale" name="locale" class="form-select form-select-sm w-auto" onchange="this.form.submit()" title="Language">
                         @foreach(['en' => 'EN', 'hi' => 'HI', 'gu' => 'GU'] as $code => $label)
                             <option value="{{ $code }}" @selected(app()->getLocale() === $code)>{{ $label }}</option>
                         @endforeach

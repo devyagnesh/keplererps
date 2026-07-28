@@ -2,7 +2,9 @@
 @section('title', 'Pack & Label')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Pack &amp; Label</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Pack &amp; Label</h1>
+        <x-admin.module-intro />
+    </div>
     @if ($challan)
     <a href="{{ route('admin.packages.print', ['delivery_challan_id' => $challan->id]) }}" target="_blank" class="btn btn-primary-light btn-sm">Print All Labels</a>
     @endif

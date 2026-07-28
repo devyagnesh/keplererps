@@ -2,7 +2,9 @@
 @section('title', 'Stock Take '.$stockTake->document_no)
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">{{ $stockTake->document_no }} · {{ $stockTake->warehouse?->code }}</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">{{ $stockTake->document_no }} · {{ $stockTake->warehouse?->code }}</h1>
+        <x-admin.module-intro />
+    </div>
     <div class="d-flex gap-2">
         <form method="post" action="{{ route('admin.stock-takes.seed', $stockTake) }}" data-ajax="1" data-reload="1">@csrf<button class="btn btn-outline-secondary btn-sm" type="submit">Reseed</button></form>
         <form method="post" action="{{ route('admin.stock-takes.post', $stockTake) }}" data-ajax="1">@csrf<button class="btn btn-primary btn-sm" type="submit">Post Variances</button></form>

@@ -2,7 +2,9 @@
 @section('title', 'Supplier Ratings')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Supplier Ratings</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Supplier Ratings</h1>
+        <x-admin.module-intro />
+    </div>
     <form method="post" action="{{ route('admin.supplier-ratings.recompute') }}" data-ajax="1" data-reload="1">@csrf<button class="btn btn-primary btn-sm" type="submit">Recompute</button></form>
 </div>
 <div class="card custom-card"><div class="card-body"><div class="table-responsive">

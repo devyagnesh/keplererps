@@ -2,7 +2,9 @@
 @section('title', 'System Health')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">System Health</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">System Health</h1>
+        <x-admin.module-intro />
+    </div>
     <button type="button" class="btn btn-primary btn-sm" id="btnClearCache" data-url="{{ route('admin.system.clear-cache') }}">Clear Caches</button>
 </div>
 <div class="row">

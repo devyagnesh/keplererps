@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Overdue Follow-ups')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Overdue Follow-ups</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Overdue Follow-ups</h1><x-admin.module-intro /></div></div>
 <div class="card custom-card"><div class="card-body"><div class="table-responsive">
 <table class="table table-bordered text-nowrap w-100"><thead><tr><th>Type</th><th>Document</th><th>Name</th><th>Due</th></tr></thead>
 <tbody>

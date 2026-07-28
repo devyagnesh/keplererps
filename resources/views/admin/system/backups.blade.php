@@ -2,7 +2,7 @@
 @section('title', 'Backups')
 @section('content')
 <div class="my-4 page-header-breadcrumb d-flex justify-content-between">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Backups</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Backups</h1><x-admin.module-intro /></div>
     <form data-ajax="1" data-reload="1" method="post" action="{{ route('admin.backups.store') }}">@csrf<button class="btn btn-primary" type="submit">Create Backup</button></form>
 </div>
 <div class="card custom-card"><div class="card-body table-responsive">

@@ -4,6 +4,7 @@
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <div>
         <h1 class="page-title fw-semibold fs-18 mb-0">Opportunity {{ $opportunity->opportunity_no }}</h1>
+        <x-admin.module-intro />
         <p class="text-muted mb-0">
             <span class="badge {{ $opportunity->stage->badgeClass() }}">{{ $opportunity->stage->label() }}</span>
             {{ $opportunity->probability_percent }}% · weighted {{ number_format($opportunity->weightedValue(), 2) }}

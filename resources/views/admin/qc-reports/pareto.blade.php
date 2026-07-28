@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Defect Pareto')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Defect Pareto</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Defect Pareto</h1><x-admin.module-intro /></div></div>
 <div class="card custom-card mb-3"><div class="card-body">
 <form method="get" class="row g-2">
     <div class="col-md-3"><input type="date" name="from_date" class="form-control" value="{{ $fromDate }}"></div>

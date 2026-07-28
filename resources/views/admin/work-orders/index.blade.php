@@ -2,7 +2,9 @@
 @section('title', 'Work Orders')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Work Orders</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Work Orders</h1>
+        <x-admin.module-intro />
+    </div>
     @can('work_order.create')
     <a href="{{ route('admin.work-orders.create') }}" class="btn btn-primary btn-sm">Add Work Order</a>
     @endcan

@@ -4,7 +4,7 @@
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
     <div>
         <h1 class="page-title fw-semibold fs-18 mb-0">Notification Rules</h1>
-        <p class="text-muted mb-0 fs-12">In-app and email channels are live; WhatsApp is reserved for later.</p>
+        <x-admin.module-intro />
     </div>
     <a href="{{ route('admin.notifications.index') }}" class="btn btn-light btn-sm">My Inbox</a>
 </div>

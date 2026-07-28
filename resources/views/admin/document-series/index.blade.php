@@ -2,7 +2,9 @@
 @section('title', 'Document Number Series')
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">Document Number Series</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">Document Number Series</h1>
+        <x-admin.module-intro />
+    </div>
     <a href="{{ route('admin.document-series.create') }}" class="btn btn-primary btn-sm">Add</a>
 </div>
 <div class="card custom-card"><div class="card-body"><div class="table-responsive">

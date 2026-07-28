@@ -67,6 +67,7 @@ typography
 /* Montserrat */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap");
 :root {
+  /* Ynex defaults (kept for reference)
   --body-bg-rgb:	240, 241, 247;
   --primary-rgb:	132, 90, 223;
   --secondary-rgb:	35, 183, 229;
@@ -80,6 +81,62 @@ typography
   --pink-rgb:	231, 145, 188;
   --teal-rgb:	18, 194, 194;
   --purple-rgb:	137, 32, 173;
+  --default-text-color:	#333335;
+  --default-border:	#f3f3f3;
+  --default-background:	#f7f8f9;
+  --menu-prime-color:	#536485;
+  --menu-border-color:	#f3f3f3;
+  --header-prime-color:	#536485;
+  --header-border-color:	#f3f3f3;
+  --bootstrap-card-border:	#f3f3f3;
+  --list-hover-focus-bg:	#f5f6f7;
+  --text-muted:	#8c9097;
+  --input-border:	#e9edf6;
+  */
+  /* Previous Kepler blue suite (kept for reference)
+  --body-bg-rgb:	248, 250, 252;
+  --primary-rgb:	42, 99, 145;
+  --secondary-rgb:	54, 138, 182;
+  --warning-rgb:	245, 158, 11;
+  --info-rgb:	14, 165, 233;
+  --success-rgb:	22, 163, 74;
+  --danger-rgb:	220, 38, 38;
+  --dark-rgb:	34, 76, 116;
+  --default-text-color:	#1F2937;
+  --default-border:	#E5E7EB;
+  */
+  /* —— Design tokens (Indigo / Slate suite) —— */
+  --wv-brand-dark: #1e1b4b;
+  --wv-brand-primary: #312e81;
+  --wv-brand-light: #4338ca;
+  --wv-brand-soft: #e0e7ff;
+  --wv-bg-page: #f8fafc;
+  --wv-surface: #ffffff;
+  --wv-border-light: #f1f5f9;
+  --wv-border: #e2e8f0;
+  --wv-text-main: #0f172a;
+  --wv-text-muted: #64748b;
+  --wv-text-faint: #94a3b8;
+  --wv-success: #059669;
+  --wv-danger: #dc2626;
+  --wv-status-pending: #d97706;
+  --wv-status-processing: #2563eb;
+  --wv-status-dispatch: #8b5cf6;
+  --wv-status-hold: #475569;
+  /* —— Map existing theme vars → design tokens (same names) —— */
+  --body-bg-rgb:	248, 250, 252; /* --wv-bg-page */
+  --primary-rgb:	49, 46, 129; /* --wv-brand-primary */
+  --secondary-rgb:	67, 56, 202; /* --wv-brand-light */
+  --warning-rgb:	217, 119, 6; /* --wv-status-pending */
+  --info-rgb:	37, 99, 235; /* --wv-status-processing */
+  --success-rgb:	5, 150, 105; /* --wv-success */
+  --danger-rgb:	220, 38, 38; /* --wv-danger */
+  --light-rgb:	224, 231, 255; /* --wv-brand-soft */
+  --dark-rgb:	30, 27, 75; /* --wv-brand-dark */
+  --orange-rgb:	217, 119, 6; /* --wv-status-pending */
+  --pink-rgb:	231, 145, 188;
+  --teal-rgb:	37, 99, 235; /* --wv-status-processing */
+  --purple-rgb:	139, 92, 246; /* --wv-status-dispatch */
   --default-body-bg-color:	rgb(var(--body-bg-rgb));
   --primary-color:	rgb(var(--primary-rgb));
   --primary-border:	rgb(var(--primary-rgb));
@@ -95,32 +152,32 @@ typography
   --primary005:	rgba(var(--primary-rgb), 0.05);
   --default-font-family:	"Inter", sans-serif;
   --default-font-weight:	400;
-  --default-text-color:	#333335;
-  --default-border:	#f3f3f3;
-  --default-background:	#f7f8f9;
-  --menu-bg:	#fff;
-  --menu-prime-color:	#536485;
-  --menu-border-color:	#f3f3f3;
-  --header-bg: #fff;
-  --header-prime-color:	#536485;
-  --header-border-color:	#f3f3f3;
-  --custom-white:	#fff;
+  --default-text-color:	var(--wv-text-main);
+  --default-border:	var(--wv-border);
+  --default-background:	var(--wv-border-light);
+  --menu-bg:	var(--wv-surface);
+  --menu-prime-color:	var(--wv-text-muted);
+  --menu-border-color:	var(--wv-border);
+  --header-bg: var(--wv-surface);
+  --header-prime-color:	var(--wv-text-muted);
+  --header-border-color:	var(--wv-border);
+  --custom-white:	var(--wv-surface);
   --custom-black:	#000;
-  --bootstrap-card-border:	#f3f3f3;
-  --list-hover-focus-bg:	#f5f6f7;
-  --text-muted:	#8c9097;
-  --input-border:	#e9edf6;
-  --form-control-bg:	#ffffff;
-  /* Gray set */
-  --gray-1:	#f9fafb;
-  --gray-2:	#f2f4f5;
-  --gray-3:	#e6eaeb;
-  --gray-4:	#dbdfe1;
-  --gray-5:	#949eb7;
-  --gray-6:	#7987a1;
-  --gray-7:	#4d5875;
-  --gray-8:	#383853;
-  --gray-9:	#323251;
+  --bootstrap-card-border:	var(--wv-border);
+  --list-hover-focus-bg:	var(--wv-border-light);
+  --text-muted:	var(--wv-text-muted);
+  --input-border:	var(--wv-border);
+  --form-control-bg:	var(--wv-surface);
+  /* Gray set — aligned to Slate suite */
+  --gray-1:	#f8fafc; /* --wv-bg-page */
+  --gray-2:	#f1f5f9; /* --wv-border-light */
+  --gray-3:	#e2e8f0; /* --wv-border */
+  --gray-4:	#cbd5e1;
+  --gray-5:	#94a3b8; /* --wv-text-faint */
+  --gray-6:	#64748b; /* --wv-text-muted */
+  --gray-7:	#475569; /* --wv-status-hold */
+  --gray-8:	#1e1b4b; /* --wv-brand-dark */
+  --gray-9:	#0f172a; /* --wv-text-main */
   /* White set */
   --white-1:	rgba(255,255,255, 0.1);
   --white-2:	rgba(255,255,255, 0.2);
@@ -690,7 +747,8 @@ typography
   border-color: #fff;
 }
 [data-menu-styles=dark][data-theme-mode=light] {
-  --menu-bg: #111c43;
+  /* --menu-bg: #111c43; Ynex default */
+  --menu-bg: #1e1b4b; /* --wv-brand-dark */
 }
 [data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg1] {
   --menu-bg: url(../images/menu-bg-images/bg-img1.jpg);
@@ -720,8 +778,10 @@ typography
   }
 }
 [data-menu-styles=dark][data-theme-mode=light] {
-  --menu-bg: #111c43;
-  --menu-prime-color: #a3aed1;
+  /* --menu-bg: #111c43; Ynex default */
+  --menu-bg: #1e1b4b; /* --wv-brand-dark */
+  /* --menu-prime-color: #a3aed1; */
+  --menu-prime-color: #E5E7EB; /* border / light text on dark menu */
 }
 
 [data-menu-styles=color] {
@@ -1100,7 +1160,7 @@ typography
   background-color: rgba(255, 255, 255, 0.1);
 }
 [data-header-styles=dark][data-theme-mode=light] {
-  --header-bg: #111c43;
+  --header-bg: #1e1b4b;
 }
 
 [data-header-styles=color] {
@@ -1225,7 +1285,7 @@ typography
     display: block;
   }
   .bg-img[data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light] .app-sidebar .slide.has-sub .slide-menu, [data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu {
-    background: #111c43;
+    background: #1e1b4b;
   }
 }
 .bg-img[data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg5] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg4] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg3] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg2] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg1] .app-sidebar .main-sidebar-header, .bg-img[data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg5] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg4] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg3] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg2] .app-sidebar .main-sidebar-header, [data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg1] .app-sidebar .main-sidebar-header {
@@ -1305,7 +1365,7 @@ typography
     display: block;
   }
   .bg-img[data-menu-styles=dark][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu {
-    background: #111c43;
+    background: #1e1b4b;
   }
 }
 .bg-img[data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg5] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg4] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg3] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg2] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg1] .app-sidebar .main-sidebar-header, .bg-img[data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg5] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg4] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg3] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg2] .app-sidebar .main-sidebar-header, [data-menu-styles=dark][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg1] .app-sidebar .main-sidebar-header {
@@ -1332,14 +1392,14 @@ typography
 }
 @media screen and (min-width: 992px) {
   .bg-img[data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg5] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg4] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg3] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg2] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg1] .slide.has-sub .slide-menu {
-    background-color: #111c43 !important;
+    background-color: #1e1b4b !important;
   }
 }
 .bg-img[data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg5] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg4] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg3] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg2] .slide.has-sub .slide-menu, [data-menu-styles=dark][data-theme-mode=light][data-vertical-style=doublemenu][data-bg-img=bgimg1] .slide.has-sub .slide-menu {
   background-color: transparent;
 }
 .bg-img[data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-click][data-toggled=menu-click-closed] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu, .bg-img[data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-hover][data-toggled=menu-hover-closed] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu, .bg-img[data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-click][data-toggled=icon-click-closed] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-click][data-toggled=icon-click-closed][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-click][data-toggled=icon-click-closed][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-click][data-toggled=icon-click-closed][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-click][data-toggled=icon-click-closed][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-click][data-toggled=icon-click-closed][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu, .bg-img[data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-hover][data-toggled=icon-hover-closed] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-hover][data-toggled=icon-hover-closed][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-hover][data-toggled=icon-hover-closed][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-hover][data-toggled=icon-hover-closed][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-hover][data-toggled=icon-hover-closed][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=dark][data-nav-layout=vertical][data-nav-style=icon-hover][data-toggled=icon-hover-closed][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu {
-  background-color: #111c43;
+  background-color: #1e1b4b;
   background-image: none;
 }
 @media screen and (min-width: 992px) {
@@ -1423,7 +1483,7 @@ typography
     display: block;
   }
   .bg-img[data-menu-styles=transparent][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=transparent][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg5] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=transparent][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg4] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=transparent][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg3] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=transparent][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg2] .app-sidebar .slide.has-sub .slide-menu, [data-menu-styles=transparent][data-nav-layout=horizontal][data-nav-layout=horizontal][data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg1] .app-sidebar .slide.has-sub .slide-menu {
-    background: #111c43;
+    background: #1e1b4b;
   }
 }
 .bg-img[data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg5] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg4] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg3] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg2] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-click][data-toggled=menu-click-closed][data-bg-img=bgimg1] .app-sidebar .main-sidebar-header, .bg-img[data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg5] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg4] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg3] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg2] .app-sidebar .main-sidebar-header, [data-menu-styles=transparent][data-nav-layout=vertical][data-menu-styles=light][data-nav-style=menu-hover][data-toggled=menu-hover-closed][data-bg-img=bgimg1] .app-sidebar .main-sidebar-header {

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Bank Reconciliation')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Bank Reconciliation</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Bank Reconciliation</h1><x-admin.module-intro /></div></div>
 <div class="card custom-card mb-3"><div class="card-body">
 <form method="get" class="row g-2">
     <div class="col-md-4">

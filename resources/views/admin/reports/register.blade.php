@@ -4,7 +4,9 @@
 
 @section('content')
 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-    <h1 class="page-title fw-semibold fs-18 mb-0">{{ $definition['title'] }}</h1>
+    <div><h1 class="page-title fw-semibold fs-18 mb-0">{{ $definition['title'] }}</h1>
+        <x-admin.module-intro :module="'reports.'.$register" />
+    </div>
     <a href="#" id="btnExport" class="btn btn-primary-light btn-sm">Export CSV</a>
 </div>
 

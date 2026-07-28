@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('title', 'Approval Rules')
 @section('content')
-<div class="my-4 page-header-breadcrumb"><h1 class="page-title fw-semibold fs-18 mb-0">Approval Rules</h1></div>
+<div class="my-4 page-header-breadcrumb"><div><h1 class="page-title fw-semibold fs-18 mb-0">Approval Rules</h1><x-admin.module-intro /></div></div>
 <div class="card custom-card mb-3"><div class="card-body">
 <form id="approvalRuleForm" data-ajax="1" data-reload="1" method="post" action="{{ route('admin.approval-rules.store') }}">
     @csrf
